@@ -1,0 +1,19 @@
+{
+  "name": "e-commerce-dashboard",
+  "version": "1.0.0",
+  "description": "\"it is mern based project of e-com\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "mongodb": "^4.9.1",
+    "mongoose": "^6.6.0",
+    "moongoose": "^0.0.5",
+    "nodemon": "^2.0.19"
+  }
+}
