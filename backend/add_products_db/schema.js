@@ -6,6 +6,7 @@ const schema = new mongoose.Schema({
     cateogry:String,
     userid:String,
     company:String,
+    productpic:String
 
 });
 
