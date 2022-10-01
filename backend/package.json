@@ -1,10 +1,11 @@
 {
-  "name": "e-commerce-dashboard",
+  "name": "nodemon",
   "version": "1.0.0",
   "description": "\"it is mern based project of e-com\"",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "nodemon": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,7 +15,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.9.1",
     "mongoose": "^6.6.0",
-    "moongoose": "^0.0.5",
+    "moongoose": "^0.0.1",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.7.8",
     "nodemon": "^2.0.20"

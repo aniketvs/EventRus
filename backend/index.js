@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 
 const app= express();
-app.use(express.json());
+
 app.use(cors());
 //signup configration
 require('./signup_db/config')
@@ -21,6 +21,7 @@ const add_products = require('./add_products_db/schema');
 require('./profile_db/config');
 const profilepic = require('./profile_db/schema');
 //jwt token
+app.use(express.json());
 const jwt = require('jsonwebtoken');
 const jwtkey='Aniket@2111';
 
