@@ -120,20 +120,25 @@ const productpic=multer({
     },
     fileFilter:fileFilter
     
-}).single('productpic');
+}).array('productpic',4);
 
 //add products api
 app.post('/add',productpic,verifytoken,async (req,resp)=>{
+ 
+    
     const data = new  add_products({
         name:req.body.name,
     price:req.body.price,
     cateogry:req.body.cateogry,
     company:req.body.company,
     userid:req.body.userid,
-    productpic:req.file.path,
+    productpic:req.files,
     });
+   
     const result = await data.save();
+
     resp.send(result);
+
 })
 
 //product listing api
