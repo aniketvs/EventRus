@@ -25,7 +25,8 @@ app.use(express.json());
 const jwt = require('jsonwebtoken');
 const jwtkey='Aniket@2111';
 
-
+//dotenv for nodemailer
+require('dotenv').config();
 
 //signup api
 
@@ -33,38 +34,12 @@ const jwtkey='Aniket@2111';
 
 //multer profile image upload
 //multer
-const fileFilter = (req,file,cb)=>{
-    if(file.mimetype=='image/jpeg' || file.mimetype ==='image/jpg' || file.mimetype ==='image/png'){
-        cb(null,true);
-    }else{
-        cb(null,false);
-    }
-    }
-    const multer=require('multer');
-    const uploads=multer({
-        storage:multer.diskStorage({
-            destination:function(req,file,cb){
-                cb(null,'../frontend/public/images');
-            },
-            filename:function(req,file,cb){
-                cb(null,Date.now()+"-"+file.originalname);
-            }
-        }) ,
-        limits:{
-            fileSize:1024*1024*10
-        },
-        fileFilter:fileFilter
-        
-    }).single('profile');
-    
-    // app.post('/uploads',uploads,async (req,resp)=>{
-    //     const data = new  profilepic({profile:req.file.path});
-    //     const result = await data.save();
-    //     resp.json({});
-       
-    // });
-    
 
+    const uploads=require('./modules/profile_multer');
+    
+const token_signup=require('./signup_db/token');
+
+const crypto=require('crypto');
 
 
 
@@ -73,9 +48,46 @@ app.post('/signup', uploads ,async (req,res)=>{
         name:req.body.name,
         email:req.body.email,
         password:req.body.password,
-        profile:req.file.path
+        profile:req.file.path,
+        verified:false,
     });
     let result=await data.save();
+    let Token =await new token_signup({
+        userid:result._id,
+        token:crypto.randomBytes(32).toString("hex")
+    }).save();
+
+    let transporte = nodemailer.createTransport({
+        service:'gmail',
+        secure:true,
+        auth:{
+            type: "OAuth2",
+            user:process.env.EMAIL,
+            pass:process.env.WORD,
+            clientId:process.env.OAUTH_CLIENTID,
+            clientSecret:process.env.OAUTH_CLIENT_SECRET,
+            refreshToken:process.env.OAUTH_REFRESH_TOKEN,
+        },
+    });
+    const url=`http://localhost:3000/signup/${result._id}/verify/${Token.token}`;
+    
+    let mailoption={
+        from:'sharmavinod8454@.com',
+        to:result.email,
+        subject:"verify mail",
+        text:url,
+    
+    };
+    transporte.sendMail(mailoption,(err,data)=>{
+        if(err){
+            console.log(err);
+        }else {
+            console.log("Email sent successfully"+data.response);
+           
+        }
+    });
+    
+    
     result = result.toObject();
     delete result.password;
     jwt.sign({result},jwtkey,{expiresIn:"30h"},(err,token)=>{
@@ -85,11 +97,70 @@ app.post('/signup', uploads ,async (req,res)=>{
         
         res.send({result,auth:token});
     })
+    
 
 });
+app.get('/:id/verify/:token',async (req,res)=>{
+    const user = await model.findOne({_id:req.params.id});
+    if(!user)return res.send({result:"user link invalid"});
+    const Token_ = await token_signup.findOne({userid:req.params.id,token:req.params.token});
+    if(!Token_)return res.send({result:"token link invalid"});
+   let result= await model.updateOne({_id:user._id},{verified:true});
+   res.json(result);
+    await token.remove();
+})
+
+
+
 app.post('/login', async (req,res)=>{
     if(req.body.email && req.body.password){
     let data = await model.findOne(req.body).select('-password');
+    
+    if(!data.verified){
+        let Token=await token_signup.findOne({userid:data._id});
+        if(!Token){
+            Token =await new token_signup({
+                userid:data._id,
+                token:crypto.randomBytes(32).toString("hex")
+            }).save();
+        }
+        const url=`http://localhost:3000/signup/${data._id}/verify/${Token.token}`;
+    
+            let transporte = nodemailer.createTransport({
+                service:'gmail',
+                secure:true,
+                auth:{
+                    type: "OAuth2",
+                    user:process.env.EMAIL,
+                    pass:process.env.WORD,
+                    clientId:process.env.OAUTH_CLIENTID,
+                    clientSecret:process.env.OAUTH_CLIENT_SECRET,
+                    refreshToken:process.env.OAUTH_REFRESH_TOKEN,
+                },
+            })
+
+            let mailoption={
+                from:'sharmavinod8454@.com',
+                to:data.email,
+                subject:"verify mail",
+                text:url,
+            
+            };
+            transporte.sendMail(mailoption,(err,data)=>{
+                if(err){
+                    console.log(err);
+                }else {
+                    console.log("Email sent successfully"+data.response);
+                   
+                }
+            });
+         
+        
+    }
+
+
+
+
     jwt.sign({data},jwtkey,{expiresIn:'30h'},(err,token)=>{
            
        if(err){
@@ -105,22 +176,11 @@ app.post('/login', async (req,res)=>{
     
  
 }});
+
 //add product multer
-const productpic=multer({
-    storage:multer.diskStorage({
-        destination:function(req,file,cb){
-            cb(null,'../frontend/public/images/productpic');
-        },
-        filename:function(req,file,cb){
-            cb(null,Date.now()+"-"+file.originalname);
-        }
-    }) ,
-    limits:{
-        fileSize:1024*1024*10
-    },
-    fileFilter:fileFilter
-    
-}).array('productpic',4);
+const productpic=require('./modules/productpic_multer');
+const token = require('./signup_db/token');
+const { modelName } = require('./signup_db/signup_schema');
 
 //add products api
 app.post('/add',productpic,verifytoken,async (req,resp)=>{
@@ -213,16 +273,43 @@ function verifytoken(req,resp,next){
 
 
 //email serviece
-// let transporter = nodemailer.createTransport({
-//     service:'gmail',
-//     auth:{
-//         user:'sharmavinod8454@gmail.com',
-//         pass:"Aniketsharma2111"
-//     }
-// })
-// let mailoption={
-//     from:'sharmavinod8454@gmail.com',
-//     to:'aniketsharma65656@gmail.com',
+let transporter = nodemailer.createTransport({
+    service:'gmail',
+    secure:true,
+    auth:{
 
-// }
+        type: "OAuth2",
+        user:process.env.EMAIL,
+        pass:process.env.WORD,
+        clientId:process.env.OAUTH_CLIENTID,
+        clientSecret:process.env.OAUTH_CLIENT_SECRET,
+        refreshToken:process.env.OAUTH_REFRESH_TOKEN,
+        
+    },
+})
+transporter.verify((err,sucess)=>{
+    err? app.post('/send-mail',(req,resp)=>{ 
+        console.log(err);    
+    }):
+    app.post('/send-mail',(req,resp)=>{
+        let mailoption={
+            from:'eventrus89@gmail.com',
+            to:process.env.EMAIL,
+            subject:req.body.text,
+            text:req.body.subject,
+        
+        };
+        transporter.sendMail(mailoption,(err,data)=>{
+            if(err){
+                console.log(err);
+            }else {
+                console.log("Email sent successfully"+data.response);
+                resp.send({data});
+            }
+        })
+    });
+});
+
+
+
 app.listen(5000);

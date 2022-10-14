@@ -8,6 +8,10 @@ const schema= new Mongoose.Schema({
     profile:{
         type:String,
         requires:true
+    },
+    verified:{
+        type:Boolean,
+        default:false
     }
 });
 
