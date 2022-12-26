@@ -328,4 +328,26 @@ else{
 }
 })
 
+
+//User Pannel
+
+
+const Contact_Us=require('./ContactUs_Form/Contactus_Schema');
+
+app.post('/contact',async(req,resp)=>{
+const data=new Contact_Us({
+name:req.body.name,
+email:req.body.email,
+phone:req.body.phone,
+message:req.body.message
+});
+let result=await data.save();
+if(result){
+resp.send(result);}
+else{
+    resp.send({result:false});
+}
+});
+
+
 app.listen(5000);
