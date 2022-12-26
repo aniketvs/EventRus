@@ -1,0 +1,85 @@
+.Gallery-img{
+    position: relative;
+}
+.Gallery-Heading{
+    position: absolute;
+    top: 50%;
+    left: 41.5%;
+    z-index: 100;
+    color: #fff;
+    font-size: 45px;
+    letter-spacing: 1px;
+    font-style: inherit;
+    font-weight: inherit;
+    font-family: 'Playfair Display',serif;
+}
+.Gallery-img-Div{
+    position: relative;
+}
+@media screen and (max-width:500px) {
+    .Gallery-Heading{
+        font-size: 20px;
+    }
+}
+@media screen and (min-width:501px) and (max-width:700px)  {
+    .Gallery-Heading{
+        font-size: 25px;
+    }
+}
+@media screen and (min-width:701px) and (max-width:900px)  {
+    .Gallery-Heading{
+        font-size: 30px;
+    }
+}
+.Modal{
+  outline: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: 0px;
+  border: 0px;
+}
+.Gallery-Box{
+  width: 50%;
+  height: 70%;
+  outline: 0px;
+  border: 0px;
+}
+
+.Gallery-imgages{
+    object-fit: contain;
+    max-width: 100%;
+    outline: 0px;
+    border: 0px;
+
+}
+@media screen and (min-width:1001px) and (max-width:1200px) {
+    .Gallery-Box{
+        width:60%;
+        height:45%;
+    }
+}
+@media screen and (min-width:801px) and (max-width:1000px) {
+    .Gallery-Box{
+        width:70%;
+        height:35%;
+    }
+}
+@media screen and (min-width:601px) and (max-width:800px) {
+    .Gallery-Box{
+        width:80%;
+        height:50%;
+    }
+}
+@media screen and (min-width:350px) and (max-width:600px) {
+    .Gallery-Box{
+        width:90%;
+        height:30%;
+    }
+}
+@media screen and (max-width:349px) {
+    .Gallery-Box{
+        width:95%;
+        height:30%;
+    }
+}

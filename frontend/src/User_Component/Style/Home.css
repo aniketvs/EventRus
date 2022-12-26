@@ -1,0 +1,24 @@
+.quote{
+    display: block;
+    opacity: 0.5;
+}
+.TestimonialCard{
+    min-width:30%;
+padding:1.5rem;
+margin:auto;
+width:30%;
+box-sizing:content-box;
+text-align:center;
+box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.HeadBox{
+    display:flex;
+justify-content:center;
+}
+
+.Carousel-Div{
+    background:#f8f9fa;
+padding:5rem;
+margin-bottom:0px;
+text-align:center;
+}

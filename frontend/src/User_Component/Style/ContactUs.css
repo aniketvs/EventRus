@@ -1,0 +1,102 @@
+.MainDiv{
+    margin-top: 50px;
+    margin-bottom: 80px;
+    display: flex;
+    padding: 3rem 4rem;
+    border: 1px solid #f8f9fa;
+    background-color: #f8f9fa;
+    box-sizing: content-box;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+   
+
+
+}
+.ConatactItem{
+    display: flex;
+    margin-top: 2rem;
+    margin-bottom: 10px;
+
+}
+.text-color-g{
+    color: #4AD295;
+}
+.text-align-line{
+    text-align:unset !important;
+    font-size: 15px;
+    margin-bottom: 6rem;
+}
+.phoneIcon{
+    color: #4AD295;
+    margin-right: 1rem;
+    
+}
+.Social-icon{
+    display: flex;
+    margin-top: 5rem;
+
+}
+.social-item{
+    margin-right:2rem;
+    color: #4AD295;
+}
+.FormMainDiv{
+    display: flex !important;
+    justify-content:flex-end;
+}
+.Form-div{
+    border: 1px solid #fff;
+    border-radius: 10px;
+    background-color: #fff;
+    width: 80%;
+}
+.Form-in-div{
+    padding: 3rem;
+}
+.text-field{
+    margin-bottom: 2rem !important;
+}
+.Button{
+    background-color: #4AD295 !important;
+    align-items: flex-end !important;
+    margin-top: 2rem !important;
+}
+.buttonDiv{
+    display: flex;
+    justify-content:flex-end ;
+}
+@media screen and (max-width:350px) {
+
+    .Form-in-div{
+        padding: 1rem !important;
+
+    }
+    .fontSizesm{
+        font-size: 11px !important;
+    }
+    .MainDiv{
+        padding: 3rem 1rem !important;
+    }
+}
+@media screen and (max-width:720px) {
+.MainDiv{
+    text-align: center;
+    display: block !important;
+    padding: 3rem 2.5rem;
+    padding-bottom: 1rem;
+ 
+}
+.FormMainDiv{
+    justify-content: start;
+    padding: 0px;
+    margin: 3rem 0px;
+    
+    padding-left: 0px;
+}
+.Form-div{
+    width: 100%;
+}
+.Form-in-div{
+    padding: 2rem;
+}
+}

@@ -1,0 +1,135 @@
+.Aboutus-Heading{
+    position: absolute;
+    top: 50%;
+    left: 44%;
+    z-index: 100;
+    color: #fff;
+    font-size: 45px;
+    letter-spacing: 1px;
+    font-style: inherit;
+    font-weight: inherit;
+    font-family: 'Playfair Display',serif;
+}
+.Aboutus-img{
+    position: relative;
+    object-fit: cover;
+    width: 100%;
+    max-width: 100%;
+}
+.Aboutus-img-Div{
+    position: relative;
+}
+@media screen and (max-width:500px) {
+    .Aboutus-Heading{
+        font-size: 20px;
+    }
+}
+@media screen and (min-width:501px) and (max-width:700px)  {
+    .Aboutus-Heading{
+        font-size: 25px;
+    }
+}
+@media screen and (min-width:701px) and (max-width:900px)  {
+    .Aboutus-Heading{
+        font-size: 30px;
+    }
+}
+.About-Container{
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+.About-Img{
+    max-width: 100%;
+    height:550px;
+    object-fit: fill;
+}
+@media screen and (max-width:900px) {
+    .About-Container{
+    
+    justify-content: center;
+    display: flex;
+    box-shadow: none;
+    }
+    .About-Img{
+        width: 100%;
+        height: auto;
+    }
+}
+.banner-card-header{
+    color: #000000;
+    font-family: "Roboto", Sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 1.4em;
+    letter-spacing: 1.7px;
+}
+.about-us-text{
+    font-family: "Roboto", Sans-serif;
+    margin-bottom: 3rem;
+    line-height: 1.5rem;
+    word-spacing: 0.2rem;
+
+}
+.Aboutus-fullwidth-img{
+height: 400px;
+object-fit: cover;
+}
+.lower-div{
+    background-color: #000000;
+    opacity: 0.51;
+ height: 450px;
+
+}
+.upper-div{
+    background-color: #E8E1D9;
+    background-image: url('../images/4.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 450px;
+    position: relative;
+}
+.About-Container2{
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+.background-text{
+  
+    color: #fff;
+    text-align: center;
+    
+    z-index: 1;
+    font-family: "Playfair Display", Sans-serif;
+    font-size: 22px;
+    line-height: 1.5em;
+   
+}
+.Aboutus-img-text-div{
+    position: absolute;
+    top: 30%;
+   
+    left: 25%;
+    max-width: 53%;
+ 
+
+  
+}
+@media screen and (max-width:600px) {
+    .background-text{
+        font-size: 15px;
+
+    }
+    .Aboutus-img-text-div{
+        top:25%;
+    }
+}
+@media screen and (min-width:601px) and (max-width:850px) {
+    .background-text{
+        font-size: 18px;
+
+    }
+    .Aboutus-img-text-div{
+        top:25%;
+    }
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/events-r-us.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>E-Commerce Dashboard</title>
+    <!--react bootstrap css link-->
+
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+    crossorigin="anonymous"
+  />
+    <!--react bootstrap cdn link for js-->
+
+    <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
+
+<script
+  src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
+  crossorigin></script>
+
+<script
+  src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
+  crossorigin></script>
+
+<script>var Alert = ReactBootstrap.Alert;</script>
+
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+
+    -->
+    <script>
+      var url = 'https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?44547';
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = url;
+      var options = {
+    "enabled":true,
+    "chatButtonSetting":{
+        "backgroundColor":"#4dc247",
+        "ctaText":"",
+        "borderRadius":"25",
+        "marginLeft":"0",
+        "marginBottom":"50",
+        "marginRight":"50",
+        "position":"right"
+    },
+    "brandSetting":{
+        "brandName":"EventRus",
+        "brandSubTitle":"Typically replies within a day",
+        "brandImg":"data:image/png;base64,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",
+        "welcomeText":"Hi there!\nHow can I help you?",
+        "messageText":"Hello, I have a question about {{page_link}}",
+        "backgroundColor":"#0a5f54",
+        "ctaText":"Start Chat",
+        "borderRadius":"25",
+        "autoShow":false,
+        "phoneNumber":"918454833153"
+    }
+  };
+      s.onload = function() {
+          CreateWhatsappChatWidget(options);
+      };
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+  </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+ 
+  </body>
+</html>

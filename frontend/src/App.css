@@ -1,0 +1,136 @@
+:root{
+  --green:#4AD295;
+ 
+}
+.error{
+  color: red;
+    font-size: 10px;
+    font-weight: 600;
+}
+.username{
+  color: var(--green);
+  text-transform: capitalize;
+  padding-bottom:30px;
+}
+.profile-pic{
+  width: 200px;
+    height: 198px;
+    border: 7px solid var(--green);
+    padding: 10px;
+    margin: 60px;
+    border-radius: 50% !important;
+  
+}
+.product_pic{
+  width: 80px;
+    height: 80px;
+    border: 2px solid var(--green);
+    padding: 5px;
+    border-radius: 50% !important;
+}
+.username{
+  text-align: center;
+  margin: 10px;
+}
+.list-display{
+  padding: 50px 30px;
+  margin-bottom: 100px;
+
+}
+.nav-login{
+  justify-content: end;
+}
+.signup-btn{
+  text-decoration: none;
+  color: white;
+}
+
+.signup-btn:hover{
+color: black;
+}
+.btn-green:hover{
+  text-decoration:none;
+  color:black;
+}
+.sign-up-btn{
+  display: flex;
+  justify-content: center;
+ 
+
+}
+.signup-body{
+  padding-top:30px;
+  padding-bottom: 30px;
+}
+.signup-body-part{
+  border: 2px solid white;
+  padding: 30px 20px;
+  background-color: transparent;
+  border-radius: 5%;
+}
+.signup-h{
+  text-align: center;
+  color:var(--green);
+}
+.btn-green{
+  background-color: var(--green);
+  color:white;
+  font-weight: 600;
+  border: 2px solid white;
+}
+.card-header{
+  color: var(--green);
+  font-weight: bolder;
+  font-size: 28px;
+  font-family: sans-serif;
+}
+.footer-set{
+  position:relative;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background-color: #f8f6f6;
+}
+
+.navbar-brand{
+  color: var(--green);
+  font-weight: bolder ;
+}
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

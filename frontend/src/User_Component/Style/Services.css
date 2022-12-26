@@ -1,0 +1,40 @@
+.Gallery-img{
+    position: relative;
+    object-fit: cover;
+    width: 100%;
+    max-width: 100%;
+}
+.Gallery-Heading{
+    position: absolute;
+    top: 50%;
+    left: 41.5%;
+    z-index: 100;
+    color: #fff;
+    font-size: 45px;
+    letter-spacing: 1px;
+    font-style: inherit;
+    font-weight: inherit;
+    font-family: 'Playfair Display',serif;
+}
+.Gallery-img-Div{
+    position: relative;
+}
+@media screen and (max-width:500px) {
+    .Gallery-Heading{
+        font-size: 12px;
+    }
+}
+@media screen and (min-width:501px) and (max-width:700px)  {
+    .Gallery-Heading{
+        font-size: 20px;
+    }
+}
+@media screen and (min-width:701px) and (max-width:900px)  {
+    .Gallery-Heading{
+        font-size: 24px;
+    }
+}
+.service-main-div{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
