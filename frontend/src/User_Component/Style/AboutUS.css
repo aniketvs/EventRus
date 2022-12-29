@@ -63,6 +63,7 @@
     text-transform: uppercase;
     line-height: 1.4em;
     letter-spacing: 1.7px;
+    margin-bottom: 1.2rem;
 }
 .about-us-text{
     font-family: "Roboto", Sans-serif;
@@ -132,4 +133,15 @@ object-fit: cover;
     .Aboutus-img-text-div{
         top:25%;
     }
+}
+.Down-aboutus-img{
+    max-width: 100%;
+
+}
+
+.aboutus-down-text{
+    font-family: "Roboto", Sans-serif;
+    margin-bottom: 3rem;
+    line-height: 1.5rem;
+    word-spacing: 0.2rem;
 }

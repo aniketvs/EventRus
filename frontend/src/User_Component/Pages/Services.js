@@ -21,7 +21,7 @@ export default function () {
         <>
             <Box className='Gallery-img-Div'>
                 <img src={i_6} className="img-fluid img-ratio Gallery-img" alt={i_6} />
-                <h2 className='Gallery-Heading'>Our Services</h2>
+                <h2 className='Gallery-Heading' data-aos='fade-up'>Our Services</h2>
             </Box>
             <div className='service-main-div'>
                 <div className='service-card-main-body row' data-aos="fade-up">

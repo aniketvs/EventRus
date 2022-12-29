@@ -26,7 +26,7 @@ export default function Gallery() {
     <>
      <Box className='Gallery-img-Div'>
       <img src={Pic} className="img-fluid img-ratio Gallery-img" alt={Pic} />
-        <h2 className='Gallery-Heading'>Galleries</h2>
+        <h2 className='Gallery-Heading' data-aos='fade-up'>Galleries</h2>
       </Box>
       <Container>
      
