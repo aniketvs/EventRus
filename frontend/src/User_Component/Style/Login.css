@@ -1,0 +1,75 @@
+.fst-div{
+background-color: #fff;
+height: auto;
+box-sizing: border-box;
+
+}
+.g-1{
+    margin-top: 7%;
+}
+.snd-div{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 2rem;
+}
+.Login-vector{
+    height:100%;
+    width:100%;
+}
+.trd-div{
+    box-sizing: border-box;
+    padding: 3rem;
+    background-color: #f8f9fa;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+ 
+}
+.title{
+    color: #000000;
+    font-family: "Roboto", Sans-serif !important;
+    font-size: 28px !important;
+    font-weight: 400 !important;
+    text-transform: uppercase !important;
+    line-height: 1.4em !important;
+    letter-spacing: 1.7px !important;
+    margin-bottom: 1.2rem !important;
+
+}
+.Inputtext-field{
+    margin: 1rem !important;
+
+  color: #fff !important;
+
+}
+.Inputtext-field-2{
+  margin:1rem !important;
+  margin-top:1px !important ;
+
+  color: #fff !important;
+
+}
+.frth-div{
+    display:inline-flex;
+}
+.lgn-btn{
+    background-color: #4AD295 !important;
+    color: #fff !important;
+  
+    margin: 0rem 1rem 1rem 1rem !important;
+}
+.New-member{
+    text-align: center !important;
+    font-size: 15px;
+    color: #000000;
+    font-family: "Playfair Display", Sans-serif;
+    margin-bottom: 5px;
+}
+.signup-link{
+    color: #4AD295 !important;
+    text-decoration: none !important;
+}
+.divider{
+    margin:5px !important;
+}

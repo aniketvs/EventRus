@@ -18,6 +18,7 @@ import Gallery from './User_Component/Pages/Gallery';
 import Services from './User_Component/Pages/Services';
 import AboutUS from './User_Component/Pages/AboutUS';
 
+
 function App() {
   let [front,setfront]=useState(false);
   
@@ -28,7 +29,6 @@ function App() {
  
   return (
     <>
-
     <BrowserRouter>
     <Nav front_p={front}/>
     <Routes>

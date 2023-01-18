@@ -134,3 +134,21 @@ color: black;
     transform: rotate(360deg);
   }
 }
+.signup-mainbox{
+ align-items: flex-end;
+}
+.signup-box{
+  display: flex;
+
+}
+.profile-btn{
+  color: #fff;
+ margin-top: -1px;
+margin-right:5px;}
+ 
+ @media screen and (min-width:992px) {
+  .signup-li{
+    position: absolute !important;
+    right: 5% !important;
+   }
+ }
