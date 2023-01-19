@@ -12,11 +12,12 @@ import { BrowserRouter,Routes , Route} from "react-router-dom";
 import Productlist from './components/Productlist';
 import Update from './components/Update';
 import Profile from './components/Profile';
-import Email_verification from './components/Email_verification';
+import EmailVerification from './components/Email_verification';
 import Home from './User_Component/Home'
 import Gallery from './User_Component/Pages/Gallery';
 import Services from './User_Component/Pages/Services';
 import AboutUS from './User_Component/Pages/AboutUS';
+import MailVerification from './User_Component/Pages/MailVerification';
 
 
 function App() {
@@ -36,13 +37,14 @@ function App() {
      <Route path='/gallery' element={<Gallery/>}/>
      <Route path='/services' element={<Services/>}/>
      <Route path='/aboutus' element={<AboutUS/>} />
+     <Route path="register/:id/UserVerification/:token" element={<MailVerification/>}/>
       <Route element={<Private/>} >
         
      
       <Route path="/admin" element={<Productlist/> }  >  </Route>
       <Route path="/add" element={<Addproduct />}/>
       <Route path="/update/:id" element={<Update />}  />
-      <Route path="signup/:id/verify/:token" element={<Email_verification />}/>
+      <Route path="signup/:id/verify/:token" element={<EmailVerification />}/>
      <Route path="/logout" element={<h1>logout</h1>}/>
       <Route path="/profile" element={<Profile />}/>
      

@@ -5,8 +5,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Box } from "@mui/system";
 import Login from "../User_Component/Pages/Login";
 const Nav = (props) => {
-  const params = useParams();
-  console.warn(params);
+ useParams();
+   
   let auth;
   let email_verification;
 

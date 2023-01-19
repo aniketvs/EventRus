@@ -350,4 +350,69 @@ else{
 });
 
 
+//user registration 
+const Registeration= require('./Register/register');
+app.post('/register',async(req,resp)=>{
+    const hashedpass=await bycrypt.hash(req.body.password,10);
+const data=new Registeration({
+    name:req.body.name,
+    phone:req.body.phone,
+    email:req.body.email,
+    password:hashedpass,
+    verified:false
+});
+let result=await data.save();
+
+let Token=await new token_signup({
+    userid:result._id,
+    token:crypto.randomBytes(32).toString('hex')
+}).save();
+
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    secure: true,
+    auth:{
+        type: "OAuth2",
+        user: process.env.EMAIL,
+        pass: process.env.WORD,
+        clientId: process.env.OAUTH_CLIENTID,
+        clientSecret: process.env.OAUTH_CLIENT_SECRET,
+        refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+    },
+});
+const url=`http://localhost:3000/register/${result._id}/UserVerification/${Token.token}`;
+
+let mailoption={
+    from: 'sharmavinod8454@.com',
+    to: result.email,
+    subject: "verify email",
+    text: url,
+};
+transporter.sendMail(mailoption,(err,data)=>{
+    if (err) {
+        console.log(err);
+    } else {
+        console.log("Email sent successfully" + data.response);
+
+    }
+});
+
+
+if(result){
+    resp.send(result);
+}else{
+    resp.send({message:"error"});
+}
+});
+
+app.get('/:id/UserVerification/:token', async (req, res) => {
+    const user = await Registeration.findOne({ _id: req.params.id });
+    if (!user) return res.send({ result: "user link invalid" });
+    const Token_ = await token_signup.findOne({ userid: req.params.id, token: req.params.token });
+    if (!Token_) return res.send({ result: "token link invalid" });
+    let result = await Registeration.updateOne({ _id: user._id }, { verified: true });
+    res.json(result);
+    await token.remove();
+})
+
 app.listen(5000);

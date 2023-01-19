@@ -2,9 +2,9 @@ import React, { useEffect} from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Banner from './Banner';
-import About_us from './AboutUs';
-import Offer_Service from './OfferServices';
-import Gallery_Home from './GalleryHome';
+import AboutUs from './AboutUs';
+import OfferService from './OfferServices';
+import GalleryHome from './GalleryHome';
 import Testimonial from './Testimonial';
 import '../User_Component/Style/Home.css'
 import ContactForm from './ContactForm';
@@ -34,13 +34,13 @@ export default function Home() {
             </div>
 
             {/*About Us*/}
-             <About_us/>
+             <AboutUs/>
             {/* Our Services */}
-            <Offer_Service/>
+            <OfferService/>
            <ContactForm/>
 
             {/*Gallery */}
-             <Gallery_Home/>
+             <GalleryHome/>
 
              <Testimonial/>
            

@@ -9,7 +9,7 @@ import i_6 from '../images/6.jpg';
 import i_7 from '../images/7.jpg';
 import i_8 from '../images/8.jpg';
 import i_9 from '../images/9.jpg';
-import {Box, Card, ImageList, ImageListItem, Modal, Button} from '@mui/material';
+import {Box, Card, ImageList, ImageListItem, Modal} from '@mui/material';
 import '../Style/Gallery.css'
 import { Container } from '@mui/system';
 export default function Gallery() {

@@ -27,7 +27,7 @@ export default function ContactForm() {
         });
         result = await result.json();
 
-        if (result.result == false) {
+        if (result.result === false) {
             alert('fail');
         } else {
             alert('Your query is submitted successfully');

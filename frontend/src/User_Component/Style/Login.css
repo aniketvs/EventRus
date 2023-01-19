@@ -73,3 +73,6 @@ box-sizing: border-box;
 .divider{
     margin:5px !important;
 }
+.textform{
+    display: flex;
+}
