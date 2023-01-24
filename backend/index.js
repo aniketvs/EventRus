@@ -404,7 +404,46 @@ if(result){
     resp.send({message:"error"});
 }
 });
-
+app.post('/resendEmail', async (req,res)=>{
+    console.log(req.body);
+    const Token_ = await token_signup.findOne({ userid: req.body.getid});
+    if(Token_){
+      let response = await token_signup.deleteOne({userid:req.body.getid});
+      console.log(response);
+    }
+    let Token=await new token_signup({
+        userid:req.body.getid,
+        token:crypto.randomBytes(32).toString('hex')
+    }).save();
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        secure: true,
+        auth:{
+            type: "OAuth2",
+            user: process.env.EMAIL,
+            pass: process.env.WORD,
+            clientId: process.env.OAUTH_CLIENTID,
+            clientSecret: process.env.OAUTH_CLIENT_SECRET,
+            refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+        },
+    });
+    const url=`http://localhost:3000/register/${req.body.getid}/UserVerification/${Token.token}`;
+    
+    let mailoption={
+        from: 'sharmavinod8454@.com',
+        to: req.body.getemail,
+        subject: "verify email",
+        text: url,
+    };
+    transporter.sendMail(mailoption,(err,data)=>{
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Email sent successfully" + data.response);
+              res.send({result:"success"});
+        }
+    });
+})
 app.get('/:id/UserVerification/:token', async (req, res) => {
     const user = await Registeration.findOne({ _id: req.params.id });
     if (!user) return res.send({ result: "user link invalid" });
@@ -414,5 +453,7 @@ app.get('/:id/UserVerification/:token', async (req, res) => {
     res.json(result);
     await token.remove();
 })
+
+
 
 app.listen(5000);

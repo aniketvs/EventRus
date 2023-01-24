@@ -17,6 +17,10 @@ box-sizing: border-box;
     height:100%;
     width:100%;
 }
+.Login-vector-email{
+    height:80%;
+    width:80%;
+}
 .trd-div{
     box-sizing: border-box;
     padding: 3rem;
