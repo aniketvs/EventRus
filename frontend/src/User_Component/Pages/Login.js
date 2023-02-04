@@ -14,6 +14,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 
 import EmailVerification from './Login/EmailVerification';
+
 export default function (props) {
   const handelclose = () => {
     props.setopen(false);
@@ -66,8 +67,83 @@ export default function (props) {
   let verify_user_email = localStorage.getItem('register_user');
   if (verify_user_email) {
     verify_user_email = JSON.parse(verify_user_email);
-    
+
   }
+
+
+  //login api
+  const[loginemail,setloginemail]=useState("");
+  const[loginpassword,setloginpassword]=useState("");
+  const [sendlink,setsendlink]=useState(true);
+  const[_id,set_id]=useState("");
+const LoginDB=async()=>{
+
+  try{
+    console.warn("click");
+    let result=await fetch('http://localhost:5000/userlogin',{
+      method: 'POST',
+      body: JSON.stringify({loginemail,loginpassword }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    result=await result.json();
+   
+    if(result.failed===false){
+      alert("please verify your email");
+      setsendlink(false);
+
+       set_id(result.result._id);
+       localStorage.setItem('register_user',JSON.stringify(result.result));
+      
+    }else if(result.match===false){
+      alert("your not register");
+    
+    }else if(result){
+      alert("you are logedin");
+      localStorage.setItem('register_user', JSON.stringify(result));
+      let getdata = localStorage.getItem('register_user');
+      if (getdata) {
+        props.setopen(false);
+      }
+     
+    }
+
+  }catch(error){
+    console.warn(error);
+  }
+  
+}
+
+//email resend link for verfication
+const ResendEmail = async()=>{
+  
+ let getid=_id;
+let getemail=loginemail;
+try{
+  let result = await fetch('http://localhost:5000/resendEmail', {
+      method: 'POST',
+      body: JSON.stringify({getid,getemail}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    result = await result.json();
+   
+    if(result){
+      alert('Email Sent Successfully');
+      let getdata = localStorage.getItem('register_user');
+      if (getdata) {
+        props.setopen(false);
+      }
+    }
+  } catch(error){
+      console.warn(error);
+      alert('Something Went wrong');
+  }
+}
+
   return (
     <>
 
@@ -93,7 +169,7 @@ export default function (props) {
                           <Typography className='title'>Sign In</Typography>
                           <Box>
 
-                            <TextField required label='Email' className='Inputtext-field' fullWidth InputProps={{
+                            <TextField required label='Email' value={loginemail} onChange={(e)=>{setloginemail(e.target.value);}} className='Inputtext-field' fullWidth InputProps={{
                               startAdornment: (
                                 <InputAdornment position="start">
                                   <EmailIcon />
@@ -103,7 +179,69 @@ export default function (props) {
                             <FormControl variant='outlined' className='Inputtext-field-2' fullWidth>
                               <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                               <OutlinedInput
+                                 value={loginpassword}
+                                 onChange={(e)=>{setloginpassword(e.target.value);}}
+                                fullWidth
+                                id="outlined-adornment-password"
 
+                                type={showPassword ? 'text' : 'password'}
+                                endAdornment={
+                                  <InputAdornment position="end">
+                                    <IconButton
+                                      aria-label="toggle password visibility"
+                                      onClick={handleClickShowPassword}
+                                      onMouseDown={handleMouseDownPassword}
+                                      edge="end"
+                                    >
+                                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                  </InputAdornment>
+                                }
+                                label="Password"
+                              />
+                            </FormControl>
+
+                          </Box>
+                          
+                          <br></br>
+                          <Button variant='contend' className='lgn-btn' onClick={LoginDB} fullWidth>Login</Button>
+                          {(sendlink===false)? 
+                            <Button variant='contend' className='lgn-btn' onClick={ResendEmail} >Resend Email</Button>
+                          :"" }
+                          <Typography className='New-member'>New Member?<Button className='signup-link' onClick={signupchange}>Sign Up Now</Button></Typography>
+                          <Divider variant='middel' className='divider'>
+                            <Chip label='Or' />
+                          </Divider>
+                           
+                           
+                           
+                        </Box>
+
+                      </Grid>
+                      :
+                      verify_user_email ?
+                        verify_user_email.verified === false ? 
+                        <Grid item sm={12} md={6}>
+                          <EmailVerification/>
+                        </Grid> : 
+                       <Grid item sm={12} md={6}>
+
+                        <Box className='trd-div'>
+                          <Typography className='title'>Sign In</Typography>
+                          <Box>
+
+                            <TextField required label='Email' value={loginemail} onChange={(e)=>{setloginemail(e.target.value)}} className='Inputtext-field' fullWidth InputProps={{
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <EmailIcon />
+                                </InputAdornment>
+                              ),
+                            }} />
+                            <FormControl variant='outlined' className='Inputtext-field-2' fullWidth>
+                              <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                              <OutlinedInput
+                                value={loginpassword}
+                                onChange={(e)=>{setloginpassword(e.target.value);}}
                                 fullWidth
                                 id="outlined-adornment-password"
 
@@ -127,22 +265,15 @@ export default function (props) {
                           </Box>
 
                           <br></br>
-                          <Button variant='contend' className='lgn-btn' fullWidth>Login</Button>
-                          <Typography className='New-member'>New Member?<Button className='signup-link' onClick={signupchange}>Sign Up Now</Button></Typography>
+                          <Button variant='contend' className='lgn-btn' onClick={LoginDB} fullWidth>Login</Button>
                           <Divider variant='middel' className='divider'>
-                            <Chip label='Or' />
+                            
                           </Divider>
-
+                          <Typography className='New-member'>Your Are Already Signup Please Login</Typography>
+                        
                         </Box>
 
-                      </Grid>
-                      :
-                      verify_user_email ?
-                        verify_user_email.verified === false ? 
-                        <Grid item sm={12} md={6}>
-                          <EmailVerification/>
-                        </Grid> : 
-                        " email is verified" :
+                      </Grid>:
                         <Grid item sm={12} md={6}>
 
                           <Box className='trd-div'>

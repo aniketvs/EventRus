@@ -9,11 +9,7 @@ const Email_verification = ()=>{
         let verification = async()=>{
             try{
             await fetch(`http://localhost:5000/${params.id}/verify/${params.token}`)
-            
-       
-
-
-            setverify(true)
+               setverify(true)
             } catch(error){
                 console.log(error);
                 setverify(false);

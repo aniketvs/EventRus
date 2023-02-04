@@ -23,7 +23,7 @@ export default function MailVerification() {
         let  data=localStorage.getItem('register_user');
         data=JSON.parse(data);
         localStorage.removeItem('register_user');
-        let sign = {name:data.name,phone:data.phone,email:data.email,password:data.password,verified:verify,_id:data._id};
+        let sign = {name:data.name,phone:data.phone,email:data.email,verified:verify,_id:data._id};
         localStorage.setItem('register_user',JSON.stringify(sign));
   return (
    <>

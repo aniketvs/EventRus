@@ -348,8 +348,6 @@ else{
     resp.send({result:false});
 }
 });
-
-
 //user registration 
 const Registeration= require('./Register/register');
 app.post('/register',async(req,resp)=>{
@@ -397,7 +395,8 @@ transporter.sendMail(mailoption,(err,data)=>{
     }
 });
 
-
+result=result.toObject();
+delete result.password;
 if(result){
     resp.send(result);
 }else{
@@ -453,7 +452,29 @@ app.get('/:id/UserVerification/:token', async (req, res) => {
     res.json(result);
     await token.remove();
 })
-
+app.post('/userlogin',async(req,res)=>{
+    if(req.body.loginemail && req.body.loginpassword){
+        let result=await Registeration.findOne({email:req.body.loginemail});
+        if(result){
+      const match = await bycrypt.compare(req.body.loginpassword,result.password);
+      
+        result=result.toObject();
+        delete result.password;
+     
+       if(match){
+            if(result.verified){
+                res.send(result);
+            }else{
+                res.send({result,failed:false});
+            }
+       }else{
+        res.send({match:false});
+       }
+     }else{
+        res.send({match:false});
+     }
+    }
+})
 
 
 app.listen(5000);
