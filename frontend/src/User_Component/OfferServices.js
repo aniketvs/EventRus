@@ -8,9 +8,13 @@ export default function Offer_Services() {
 
     }, []);
     const getservices = async () => {
+        try{
         let result = await fetch('http://localhost:5000/services');
         const data = await result.json();
         setservice(data);
+        }catch(error){
+            console.warn(error);
+        }
 
     }
   return (

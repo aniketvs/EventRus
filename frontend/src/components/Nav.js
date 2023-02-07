@@ -4,6 +4,7 @@ import brand_logo from "../images/events-r-us.svg"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Box } from "@mui/system";
 import Login from "../User_Component/Pages/Login";
+import LogoutIcon from '@mui/icons-material/Logout';
 const Nav = (props) => {
  useParams();
    
@@ -29,6 +30,25 @@ const Nav = (props) => {
     ? user_panel = true : user_panel = false;
 
 const [open,setopen]=useState(false);
+
+// user email verification status
+let userLogin=localStorage.getItem('register_user');
+userLogin=JSON.parse(userLogin);
+
+let userVerified=false;
+if(userLogin!=null){
+  userVerified=userLogin.verified;
+}
+console.warn(userVerified);
+ 
+//userLogout
+let userLogout=()=>{
+  userVerified=false;
+  localStorage.removeItem('register_user');
+  navigate('/');
+}
+
+
   return (
 
 
@@ -145,13 +165,20 @@ const [open,setopen]=useState(false);
                   </Link>
                 </li>
                 <li className="nav-item signup-li">
-
+                 { userVerified===true?
+                  <Link className="nav-link nav-link-color signup-mainbox" to="/">
+                    <Box className='signup-box' >
+                      Logout
+                      <LogoutIcon className="logout-icon" onClick={userLogout}/>
+                    </Box>
+                  </Link>:
                   <Link className="nav-link nav-link-color signup-mainbox" to="/">
                     <Box className='signup-box' onClick={()=>{setopen(true)}}>
                       <AccountCircleIcon className="profile-btn"/>
                       Login/Register
                     </Box>
                   </Link>
+                 }
                 </li>
 
               </ul>
