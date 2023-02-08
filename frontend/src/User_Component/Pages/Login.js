@@ -41,9 +41,30 @@ export default function (props) {
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
 
-
+  const[regerror,setregerror]=useState(false);
   const register_user = async () => {
     try{
+    
+      if(!name && !phone && !email && !password){
+        setregerror(true);
+        return false;
+      }
+      if(!name){
+        setregerror(true);
+        return false;
+      }
+      if(!email){
+        setregerror(true);
+        return false;
+      }
+      if(!phone){
+        setregerror(true);
+        return false;
+      }
+      if(!password){
+        setregerror(true);
+        return false;
+      }
     let result = await fetch('http://localhost:5000/register', {
       method: 'POST',
       body: JSON.stringify({ name, phone, email, password }),
@@ -70,16 +91,33 @@ export default function (props) {
 
   }
 
+  //register user error handel
+  const RegChange=(e)=>{
+    e.preventDefault();
+    setregerror(false);
+  }
 
   //login api
   const[loginemail,setloginemail]=useState("");
   const[loginpassword,setloginpassword]=useState("");
   const [sendlink,setsendlink]=useState(true);
   const[_id,set_id]=useState("");
+  const [loginerror,setloginerror]=useState(false);
 const LoginDB=async()=>{
 
   try{
-    console.warn("click");
+     if(!loginemail && !loginpassword){
+      setloginerror(true);
+      return false;
+     }
+     if(!loginemail){
+      setloginerror(true);
+      return false;
+     }
+     if(!loginpassword){
+      setloginerror(true);
+      return false;
+     }
     let result=await fetch('http://localhost:5000/userlogin',{
       method: 'POST',
       body: JSON.stringify({loginemail,loginpassword }),
@@ -114,7 +152,11 @@ const LoginDB=async()=>{
   }
   
 }
-
+//login change
+const LoginChange=(e)=>{
+  e.preventDefault();
+  setloginerror(false);
+}
 //email resend link for verfication
 const ResendEmail = async()=>{
   
@@ -168,14 +210,45 @@ try{
                         <Box className='trd-div'>
                           <Typography className='title'>Sign In</Typography>
                           <Box>
-
+                            {!loginemail && loginerror?
+                              <TextField required label='Email' error id="outlined-error" onClick={LoginChange} value={loginemail}  className='Inputtext-field' fullWidth InputProps={{
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <EmailIcon />
+                                </InputAdornment>
+                              ),
+                            }} /> :
                             <TextField required label='Email' value={loginemail} onChange={(e)=>{setloginemail(e.target.value);}} className='Inputtext-field' fullWidth InputProps={{
                               startAdornment: (
                                 <InputAdornment position="start">
                                   <EmailIcon />
                                 </InputAdornment>
                               ),
-                            }} />
+                            }} />}
+                            { !loginpassword && loginerror?  <FormControl variant='outlined' error className='Inputtext-field-2' fullWidth>
+                              <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                              <OutlinedInput
+                                 value={loginpassword}
+                                 error
+                                fullWidth
+                                id="outlined-adornment-password"
+                                onClick={LoginChange}
+                                type={showPassword ? 'text' : 'password'}
+                                endAdornment={
+                                  <InputAdornment position="end">
+                                    <IconButton
+                                      aria-label="toggle password visibility"
+                                      onClick={handleClickShowPassword}
+                                      onMouseDown={handleMouseDownPassword}
+                                      edge="end"
+                                    >
+                                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                  </InputAdornment>
+                                }
+                                label="Password"
+                              />
+                            </FormControl>:
                             <FormControl variant='outlined' className='Inputtext-field-2' fullWidth>
                               <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                               <OutlinedInput
@@ -200,7 +273,7 @@ try{
                                 label="Password"
                               />
                             </FormControl>
-
+                            }
                           </Box>
                           
                           <br></br>
@@ -229,7 +302,14 @@ try{
                         <Box className='trd-div'>
                           <Typography className='title'>Sign In</Typography>
                           <Box>
-
+                           {!loginemail && loginerror ? 
+                            <TextField   onClick={LoginChange} required label='Email' value={loginemail} error id='outlined-error' className='Inputtext-field' fullWidth InputProps={{
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <EmailIcon />
+                                </InputAdornment>
+                              ),
+                            }} />: 
                             <TextField required label='Email' value={loginemail} onChange={(e)=>{setloginemail(e.target.value)}} className='Inputtext-field' fullWidth InputProps={{
                               startAdornment: (
                                 <InputAdornment position="start">
@@ -237,6 +317,33 @@ try{
                                 </InputAdornment>
                               ),
                             }} />
+                           }
+                           {!loginpassword && loginerror?
+                            <FormControl error variant='outlined' className='Inputtext-field-2' fullWidth>
+                              <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                              <OutlinedInput
+                              onClick={LoginChange}
+                                value={loginpassword}
+                                error
+                                fullWidth
+                                id="outlined-adornment-password"
+                          
+                                type={showPassword ? 'text' : 'password'}
+                                endAdornment={
+                                  <InputAdornment position="end">
+                                    <IconButton
+                                      aria-label="toggle password visibility"
+                                      onClick={handleClickShowPassword}
+                                      onMouseDown={handleMouseDownPassword}
+                                      edge="end"
+                                    >
+                                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                  </InputAdornment>
+                                }
+                                label="Password"
+                              />
+                            </FormControl>:
                             <FormControl variant='outlined' className='Inputtext-field-2' fullWidth>
                               <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                               <OutlinedInput
@@ -261,6 +368,7 @@ try{
                                 label="Password"
                               />
                             </FormControl>
+                           }
 
                           </Box>
 
@@ -280,7 +388,19 @@ try{
                             <Typography className='title'>Sign up</Typography>
                             <Box>
                               <Box className='textform'>
-                                <TextField required label='Full Name' className='Inputtext-field' InputProps={{
+                              {!name && regerror ?
+                                <TextField required label='Full Name' className='Inputtext-field'
+                                     error
+                                    id="outlined-error"
+                                     InputProps={{
+                                  startAdornment: (
+                                    <InputAdornment position="start">
+                                      <PersonIcon />
+                                    </InputAdornment>
+                                  ),
+                                }} value={name} onClick={RegChange} />
+                               :
+                               <TextField required label='Full Name' className='Inputtext-field' InputProps={{
                                   startAdornment: (
                                     <InputAdornment position="start">
                                       <PersonIcon />
@@ -288,6 +408,18 @@ try{
                                   ),
                                 }} value={name} onChange={(e) => { setname(e.target.value) }} />
 
+                              }
+                               {!phone && regerror?
+                                <TextField required label='Phone Number' className='Inputtext-field'
+                                error 
+                                id="outlined-error" InputProps={{
+                                  startAdornment: (
+                                    <InputAdornment position="start">
+                                      +91
+                                    </InputAdornment>
+                                  ),
+                                }} value={phone}   onClick={RegChange} />
+                                 :
                                 <TextField required label='Phone Number' className='Inputtext-field' InputProps={{
                                   startAdornment: (
                                     <InputAdornment position="start">
@@ -296,10 +428,20 @@ try{
                                   ),
                                 }} value={phone} onChange={(e) => { setphone(e.target.value) }} />
 
-
+                               }
 
                               </Box>
-
+                               
+                              {!email && regerror ?
+                                <TextField required label='Email'   onClick={RegChange} className='Inputtext-field'
+                                error id='outlined-error' fullWidth InputProps={{
+                                startAdornment: (
+                                  <InputAdornment position="start">
+                                    <EmailIcon />
+                                  </InputAdornment>
+                                ),
+                              }} value={email} /> :
+                              
 
                               <TextField required label='Email' className='Inputtext-field' fullWidth InputProps={{
                                 startAdornment: (
@@ -308,11 +450,41 @@ try{
                                   </InputAdornment>
                                 ),
                               }} value={email} onChange={(e) => { setemail(e.target.value) }} />
-                              <FormControl variant='outlined' className='Inputtext-field-2' fullWidth >
+                              }
+                              {!password && regerror ?
+                                <FormControl error variant='outlined' className='Inputtext-field-2' fullWidth >
                                 <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                                 <OutlinedInput
 
                                   fullWidth
+                                  error
+                                  id="outlined-adornment-password"
+                                    onClick={RegChange}
+                                  type={showPassword ? 'text' : 'password'}
+                                  endAdornment={
+                                    <InputAdornment position="end">
+                                      <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                      >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                      </IconButton>
+                                    </InputAdornment>
+                                  }
+                                  label="Password"
+                                  value={password}
+                                  
+
+                                />
+                              </FormControl> :
+                              <FormControl  variant='outlined' className='Inputtext-field-2' fullWidth >
+                                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                                <OutlinedInput
+
+                                  fullWidth
+                                  
                                   id="outlined-adornment-password"
 
                                   type={showPassword ? 'text' : 'password'}
@@ -334,7 +506,7 @@ try{
 
                                 />
                               </FormControl>
-
+                              }
                             </Box>
 
                             <br></br>
