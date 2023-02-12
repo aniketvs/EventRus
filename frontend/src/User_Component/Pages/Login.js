@@ -1,4 +1,4 @@
-import { Button, Chip, Container, Divider, Grid, Modal, TextField, Typography } from '@mui/material'
+import { Button,Container, Divider, Grid, Modal, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system';
 import React, { useState } from 'react'
 import '../Style/Login.css'
@@ -29,6 +29,9 @@ export default function (props) {
   };
   const signupchange = () => {
     setsignup(false);
+  }
+  const Loginchange=()=>{
+    setsignup(true);
   }
 
 
@@ -282,9 +285,7 @@ try{
                             <Button variant='contend' className='lgn-btn' onClick={ResendEmail} >Resend Email</Button>
                           :"" }
                           <Typography className='New-member'>New Member?<Button className='signup-link' onClick={signupchange}>Sign Up Now</Button></Typography>
-                          <Divider variant='middel' className='divider'>
-                            <Chip label='Or' />
-                          </Divider>
+                          
                            
                            
                            
@@ -511,7 +512,8 @@ try{
 
                             <br></br>
                             <Button variant='contend' className='lgn-btn' onClick={register_user} fullWidth>Register</Button>
-
+                            <Typography className='New-member'>Already Register ? <Button className='signup-link' onClick={Loginchange}>Login</Button></Typography>
+                         
                           </Box>
 
                         </Grid>
