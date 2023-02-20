@@ -48,7 +48,7 @@ app.post('/signup', uploads, async (req, res) => {
         profile: req.file.path,
         verified: false,
     });
-  
+
     let result = await data.save();
     let Token = await new token_signup({
         userid: result._id,
@@ -113,12 +113,12 @@ app.get('/:id/verify/:token', async (req, res) => {
 app.post('/login', async (req, res) => {
     if (req.body.email && req.body.password) {
 
-        let data = await model.findOne({email:req.body.email});
+        let data = await model.findOne({ email: req.body.email });
         const match = await bycrypt.compare(req.body.password, data.password);
         data = data.toObject();
-    delete data.password;
+        delete data.password;
         if (match) {
-            
+
             if (!data.verified) {
                 let Token = await token_signup.findOne({ userid: data._id });
                 if (!Token) {
@@ -319,105 +319,59 @@ transporter.verify((err, sucess) => {
 
 //user pannel
 //services getting api
-app.get('/services',async(req,resp)=>{
-let result =await add_products.find();
-if(result.length>0){
-resp.send(result);}
-else{
-    resp.send({result:"sorry there is no service is present"});
-}
+app.get('/services', async (req, resp) => {
+    let result = await add_products.find();
+    if (result.length > 0) {
+        resp.send(result);
+    }
+    else {
+        resp.send({ result: "sorry there is no service is present" });
+    }
 })
 
 
 //User Pannel
 
 
-const Contact_Us=require('./ContactUs_Form/Contactus_Schema');
+const Contact_Us = require('./ContactUs_Form/Contactus_Schema');
 
-app.post('/contact',async(req,resp)=>{
-const data=new Contact_Us({
-name:req.body.name,
-email:req.body.email,
-phone:req.body.phone,
-message:req.body.message
-});
-let result=await data.save();
-if(result){
-resp.send(result);}
-else{
-    resp.send({result:false});
-}
+app.post('/contact', async (req, resp) => {
+    const data = new Contact_Us({
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone,
+        message: req.body.message
+    });
+    let result = await data.save();
+    if (result) {
+        resp.send(result);
+    }
+    else {
+        resp.send({ result: false });
+    }
 });
 //user registration 
-const Registeration= require('./Register/register');
-app.post('/register',async(req,resp)=>{
-    const hashedpass=await bycrypt.hash(req.body.password,10);
-const data=new Registeration({
-    name:req.body.name,
-    phone:req.body.phone,
-    email:req.body.email,
-    password:hashedpass,
-    verified:false
-});
-let result=await data.save();
+const Registeration = require('./Register/register');
+app.post('/register', async (req, resp) => {
+    const hashedpass = await bycrypt.hash(req.body.password, 10);
+    const data = new Registeration({
+        name: req.body.name,
+        phone: req.body.phone,
+        email: req.body.email,
+        password: hashedpass,
+        verified: false
+    });
+    let result = await data.save();
 
-let Token=await new token_signup({
-    userid:result._id,
-    token:crypto.randomBytes(32).toString('hex')
-}).save();
-
-let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    secure: true,
-    auth:{
-        type: "OAuth2",
-        user: process.env.EMAIL,
-        pass: process.env.WORD,
-        clientId: process.env.OAUTH_CLIENTID,
-        clientSecret: process.env.OAUTH_CLIENT_SECRET,
-        refreshToken: process.env.OAUTH_REFRESH_TOKEN,
-    },
-});
-const url=`http://localhost:3000/register/${result._id}/UserVerification/${Token.token}`;
-
-let mailoption={
-    from: 'sharmavinod8454@.com',
-    to: result.email,
-    subject: "verify email",
-    text: url,
-};
-transporter.sendMail(mailoption,(err,data)=>{
-    if (err) {
-        console.log(err);
-    } else {
-        console.log("Email sent successfully" + data.response);
-
-    }
-});
-
-result=result.toObject();
-delete result.password;
-if(result){
-    resp.send(result);
-}else{
-    resp.send({message:"error"});
-}
-});
-app.post('/resendEmail', async (req,res)=>{
-    console.log(req.body);
-    const Token_ = await token_signup.findOne({ userid: req.body.getid});
-    if(Token_){
-      let response = await token_signup.deleteOne({userid:req.body.getid});
-      console.log(response);
-    }
-    let Token=await new token_signup({
-        userid:req.body.getid,
-        token:crypto.randomBytes(32).toString('hex')
+    let Token = await new token_signup({
+        userid: result._id,
+        token: crypto.randomBytes(32).toString('hex')
     }).save();
+
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         secure: true,
-        auth:{
+        auth: {
             type: "OAuth2",
             user: process.env.EMAIL,
             pass: process.env.WORD,
@@ -426,20 +380,68 @@ app.post('/resendEmail', async (req,res)=>{
             refreshToken: process.env.OAUTH_REFRESH_TOKEN,
         },
     });
-    const url=`http://localhost:3000/register/${req.body.getid}/UserVerification/${Token.token}`;
-    
-    let mailoption={
+    const url = `http://localhost:3000/register/${result._id}/UserVerification/${Token.token}`;
+
+    let mailoption = {
+        from: 'sharmavinod8454@.com',
+        to: result.email,
+        subject: "verify email",
+        text: url,
+    };
+    transporter.sendMail(mailoption, (err, data) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Email sent successfully" + data.response);
+
+        }
+    });
+
+    result = result.toObject();
+    delete result.password;
+    if (result) {
+        resp.send(result);
+    } else {
+        resp.send({ message: "error" });
+    }
+});
+app.post('/resendEmail', async (req, res) => {
+    console.log(req.body);
+    const Token_ = await token_signup.findOne({ userid: req.body.getid });
+    if (Token_) {
+        let response = await token_signup.deleteOne({ userid: req.body.getid });
+        console.log(response);
+    }
+    let Token = await new token_signup({
+        userid: req.body.getid,
+        token: crypto.randomBytes(32).toString('hex')
+    }).save();
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        secure: true,
+        auth: {
+            type: "OAuth2",
+            user: process.env.EMAIL,
+            pass: process.env.WORD,
+            clientId: process.env.OAUTH_CLIENTID,
+            clientSecret: process.env.OAUTH_CLIENT_SECRET,
+            refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+        },
+    });
+    const url = `http://localhost:3000/register/${req.body.getid}/UserVerification/${Token.token}`;
+
+    let mailoption = {
         from: 'sharmavinod8454@.com',
         to: req.body.getemail,
         subject: "verify email",
         text: url,
     };
-    transporter.sendMail(mailoption,(err,data)=>{
+    transporter.sendMail(mailoption, (err, data) => {
         if (err) {
             console.log(err);
         } else {
             console.log("Email sent successfully" + data.response);
-              res.send({result:"success"});
+            res.send({ result: "success" });
         }
     });
 })
@@ -452,29 +454,60 @@ app.get('/:id/UserVerification/:token', async (req, res) => {
     res.json(result);
     await token.remove();
 })
-app.post('/userlogin',async(req,res)=>{
-    if(req.body.loginemail && req.body.loginpassword){
-        let result=await Registeration.findOne({email:req.body.loginemail});
-        if(result){
-      const match = await bycrypt.compare(req.body.loginpassword,result.password);
-      
-        result=result.toObject();
-        delete result.password;
-     
-       if(match){
-            if(result.verified){
-                res.send(result);
-            }else{
-                res.send({result,failed:false});
+app.post('/userlogin', async (req, res) => {
+    if (req.body.loginemail && req.body.loginpassword) {
+        let result = await Registeration.findOne({ email: req.body.loginemail });
+        if (result) {
+            const match = await bycrypt.compare(req.body.loginpassword, result.password);
+
+            result = result.toObject();
+            delete result.password;
+
+            if (match) {
+                if (result.verified) {
+                    res.send(result);
+                } else {
+                    res.send({ result, failed: false });
+                }
+            } else {
+                res.send({ match: false });
             }
-       }else{
-        res.send({match:false});
-       }
-     }else{
-        res.send({match:false});
-     }
+        } else {
+            res.send({ match: false });
+        }
     }
 })
+
+
+// conatct
+app.get('/book/:id', async (req, res) => {
+   
+    try {
+        const data = await add_products.findOne({ _id: req.params.id });
+        
+        if (data) {
+            res.send(data);
+        } else {
+            res.send({ result: "no record is found" });
+        }
+    } catch (err) {
+        res.status(500).send({error:err});
+    }
+});
+
+const bookevent=require('./ContactUs_Form/contact');
+app.post('/bookContact',async(req,res)=>{
+  try{
+    console.log(req.body);
+   let result = new bookevent(req.body);
+  result=await result.save();
+  res.send(result);
+  }catch(err){
+    console.log(err);
+    res.status(500).send({error:err});
+  }
+});
+    
 
 
 app.listen(5000);

@@ -18,7 +18,7 @@ import Gallery from './User_Component/Pages/Gallery';
 import Services from './User_Component/Pages/Services';
 import AboutUS from './User_Component/Pages/AboutUS';
 import MailVerification from './User_Component/Pages/MailVerification';
-
+import Contact from './User_Component/Pages/Contact';
 
 function App() {
   let [front,setfront]=useState(false);
@@ -37,6 +37,10 @@ function App() {
      <Route path='/gallery' element={<Gallery/>}/>
      <Route path='/services' element={<Services/>}/>
      <Route path='/aboutus' element={<AboutUS/>} />
+
+     
+     <Route path='/book/:id' element={<Contact/>} />
+    
      <Route path="register/:id/UserVerification/:token" element={<MailVerification/>}/>
       <Route element={<Private/>} >
         

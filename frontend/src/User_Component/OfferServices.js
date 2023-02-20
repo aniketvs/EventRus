@@ -55,7 +55,7 @@ export default function Offer_Services() {
                                         <h5 className="card-title">{item.name}</h5>
                                         <p className="card-text">{item.company}</p>
                                         <p className="card-text">{(item.cateogry).slice(0, 50)}</p>
-                                        <Link to="/" className="btn btn-green book-btn" >Book Now</Link>
+                                        <Link to={`/book/${item._id}`} className="btn btn-green book-btn" >Book Now</Link>
                                     </div>
                                 </div>
                             )

@@ -1,0 +1,9 @@
+.container-margin{
+    margin-top: 12rem !important;
+}
+
+@media screen and (max-width:899px) {
+    .marginto{
+       margin-bottom: 2rem !important;
+    }
+}
