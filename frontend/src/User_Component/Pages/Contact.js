@@ -15,30 +15,36 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
-import {useParams} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 export default function Contact() {
 
 
     //get api
-    const params=useParams();
-    useEffect(()=>{
+    const params = useParams();
+    useEffect(() => {
         result();
-    },[]);
-    
-    const [eventName,seteventName]=useState("");
-    const [eventType,seteventType]=useState("");
-    let result =async()=>{
-     let res=await fetch(`http://localhost:5000/book/${params.id}`);
-     res=await res.json();
-     console.log(res);
-     seteventName(res.name);
-     seteventType(res.company);
+    }, []);
+
+    const [eventName, seteventName] = useState("");
+    const [eventType, seteventType] = useState("");
+
+    let result = async () => {
+        try {
+            let res = await fetch(`http://localhost:5000/book/${params.id}`);
+            res = await res.json();
+
+            seteventName(res.name);
+            seteventType(res.company);
+        } catch (error) {
+            console.log(error);
+        }
     }
- 
 
 
-// datae picker
+
+
+    // datae picker
 
     let [eventdate, seteventdate] = useState(dayjs(new Date()));
     let [lastdate, setlastdate] = useState(dayjs(new Date()));
@@ -59,29 +65,97 @@ export default function Contact() {
     let [email, setemail] = useState('');
     let [phone, setphone] = useState("");
     let [message, setmessage] = useState('');
-
+    let [err, seterr] = useState(false);
+    let [phoneregex, setphoneregex] = useState(false);
+    let [emailregex, setemailregex] = useState(false);
+    let [nameregex, setnameregex] = useState(false);
     const sendMsg = async () => {
-        let result = await fetch('http://localhost:5000/bookContact', {
-            method: 'POST',
-            body: JSON.stringify({ name, email, phone,eventName,eventType,startDate,endDate,message }),
 
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        result = await result.json();
 
-        if (result.result === false) {
-            alert('fail');
-        } else {
-            alert('Your query is submitted successfully');
-            setname('');
-            setemail('');
-            setphone("");
-            setmessage('');
+
+        try {
+            // check weather any field is empty or not and matching reges
             
 
-        }
+            if (!email && !phone && !name && !startDate && !endDate) {
+                seterr(true);
+                return false;
+            }
+            if(!phone){
+                seterr(true);
+                return false;
+            }
+            if (!email) {
+                seterr(true);
+                return false;
+            }
+            if (!name) {
+                seterr(true);
+                return false;
+
+            }
+            if (!startDate) {
+                seterr(true);
+                return false;
+            }
+            if (!endDate) {
+                seterr(true);
+                return false;
+            }
+            // regex matching  for phone
+            const phoneRegex=/^(?:\+?\d{1,3}[-\s]?)?\d{10}$/;
+            if(!phoneRegex.test(phone)){
+                setphoneregex(true);
+                 return false;
+            }
+            //regex matching for email
+            let emailRegex= /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if(!emailRegex.test(email)){
+                setemailregex(true);
+                 return false;
+            }
+            // name regex matching
+            let nameRegex=/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+            if(!nameRegex.test(name)){
+                setnameregex(true);
+                 return false;
+            }
+
+            let result = await fetch('http://localhost:5000/bookContact', {
+                method: 'POST',
+                body: JSON.stringify({ name, email, phone, eventName, eventType, startDate, endDate, message }),
+
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            result = await result.json();
+
+            if (result.result === false) {
+                alert('fail');
+            } else {
+                alert('Your query is submitted successfully');
+                setname('');
+                setemail('');
+                setphone("");
+                setmessage('');
+
+
+            }
+        } catch (error) {
+            alert(error);
+        };
+    }
+    let ErrorChange=(e)=>{
+      e.preventDefault();
+      seterr(false);
+      if(phoneregex)
+      {setphoneregex(false)}
+      if(emailregex)
+      {setemailregex(false)}
+      if(nameregex){
+        setnameregex(false);
+      }
     }
     return (
         <>
@@ -120,22 +194,46 @@ export default function Contact() {
                         <Box className='Form-div' >
                             <Box className='Form-in-div'>
                                 <Box component='form' autoComplete='off'>
-                                    <TextField className='text-field' label='Your Name' defaultValue='Enter Your Name' value={name} onChange={(e) => { setname(e.target.value); }}
-                                        InputProps={{
+                                    {(err || nameregex) ?
+                                        <TextField required label='Your Name' error id="outlined-error" className='text-field' defaultValue='Enter Your Name' onClick={ErrorChange} value={name} fullWidth InputProps={{
                                             startAdornment: (
                                                 <InputAdornment position="start">
-                                                    <PersonIcon />
+                                                   <PersonIcon />
                                                 </InputAdornment>
                                             ),
-                                        }}
+                                        }} />
+                                        :
+                                        <TextField className='text-field' label='Your Name' defaultValue='Enter Your Name' value={name} onChange={(e) => { setname(e.target.value); }}
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <InputAdornment position="start">
+                                                        <PersonIcon />
+                                                    </InputAdornment>
+                                                ),
+                                            }}
 
-                                        fullWidth={true}
+                                            fullWidth={true}
 
-                                    />
+                                        />
+                                    }
                                     <Grid container spacing={1}>
                                         <Grid item xs={12} sm={12} md={6} lg={6}>
 
+                                             {
+                                                (err || emailregex)?
+                                                <TextField className='text-field' label='Email' error id='outlined-error' defaultValue='Enter Your Email' value={email} onClick={ErrorChange}
+                                                InputProps={{
+                                                    startAdornment: (
+                                                        <InputAdornment position="start">
+                                                            <EmailIcon />
+                                                        </InputAdornment>
+                                                    ),
+                                                }}
 
+                                                fullWidth={true}
+
+                                            />
+                                                :
                                             <TextField className='text-field' label='Email' defaultValue='Enter Your Email' value={email} onChange={(e) => { setemail(e.target.value); }}
                                                 InputProps={{
                                                     startAdornment: (
@@ -148,8 +246,24 @@ export default function Contact() {
                                                 fullWidth={true}
 
                                             />
+                                             }
                                         </Grid>
                                         <Grid item xs={12} sm={12} md={6} lg={6}>
+                                        { (err || phoneregex) ?
+                                            <TextField className='text-field' label='Phone' id='outlined-error' error defaultValue='Enter Your Phone Number' value={phone} onClick={ErrorChange}
+                                                InputProps={{
+                                                    startAdornment: (
+                                                        <InputAdornment position="start">
+                                                            <PhoneIcon />
+                                                        </InputAdornment>
+                                                    ),
+                                                }}
+
+                                                fullWidth={true}
+
+                                            />
+                                                 :
+
                                             <TextField className='text-field' label='Phone' defaultValue='Enter Your Phone Number' value={phone} onChange={(e) => { setphone(e.target.value); }}
                                                 InputProps={{
                                                     startAdornment: (
@@ -162,6 +276,7 @@ export default function Contact() {
                                                 fullWidth={true}
 
                                             />
+                                        }
                                         </Grid>
                                     </Grid>
                                     <Grid container spacing={1}>
@@ -184,8 +299,10 @@ export default function Contact() {
                                         </Grid>
                                     </Grid>
                                     <Grid container spacing={1}>
-                                        <Grid item xs={12} sm={12} md={6} lg={6} style={{marginBottom:"2rem"}}>
+                                        <Grid item xs={12} sm={12} md={6} lg={6} style={{ marginBottom: "2rem" }}>
                                             <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                            
+                                              
                                                 <DesktopDatePicker
                                                     label="From"
                                                     inputFormat="MM/DD/YYYY"
@@ -193,6 +310,7 @@ export default function Contact() {
                                                     onChange={handleChange}
                                                     renderInput={(params) => <TextField {...params} fullWidth={true} />}
                                                 />
+                                            
 
                                             </LocalizationProvider>
                                         </Grid>

@@ -14,7 +14,9 @@ const Addproduct = () => {
   const navigate = useNavigate();
 //price and text regex
 const regex=/\^(\d*([.,](?=\d{3}))?\d+)+((?!\2)[.,]\d\d)?$/;
-const testregx=/[(a-zA-Z)+(\!\@\#\$\%\^\&\*\(\))+]/;
+const testregx=/[(a-zA-Z)+(!@#$%^&*())+]/;
+
+///[(a-zA-Z)+(\!\@\#\$\%\^\&\*\(\))+]/;
  const add= async()=>{
   // if name,prie,company and cateogry is empty
   if(!name && !price && !company && !cateogry && !pic){

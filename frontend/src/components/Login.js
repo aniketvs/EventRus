@@ -19,7 +19,7 @@ const Login = () => {
     const [verification, setverification] = useState(true);
     let auth;
     //validating email using regex
-    const emailregx = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    const emailregx =/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const navigate = useNavigate();
 
     const login = async () => {

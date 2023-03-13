@@ -30,8 +30,9 @@ export default function Update() {
         
       
     }
-    const regex=/^(\d*([.,](?=\d{3}))?\d+)+((?!\2)[.,]\d\d)?$/;
-const testregx=/[(a-zA-Z)+(\!\@\#\$\%\^\&\*\(\))+]/;
+    const regex=/^(\d{1,3}(,\d{3})*|\d+)(\.\d+)?$/;
+const testregx=/[(a-zA-Z)+(!@#$%^&*())+]/ ;
+///[(a-zA-Z)+(\!\@\#\$\%\^\&\*\(\))+]/;
     const update =async()=>{
 
 

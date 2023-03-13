@@ -20,7 +20,7 @@ export default function Signup() {
 
   })
   //validating with regex for email,password and name
-  const emailregx = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  const emailregx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordregx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   const nameregx = /[a-zA-Z][a-zA-Z ]*/;
 

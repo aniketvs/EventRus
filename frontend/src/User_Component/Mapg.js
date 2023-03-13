@@ -14,6 +14,7 @@ function Mapg() {
     googleMapsApiKey: "AIzaSyCb18W7Leqb6ceMBORMPsCyepRIw5sL3xY"
   })
   const [map,setMap]=useState(null);
+  console.log(map);
   const onLoad = React.useCallback(function callback(map) {
     const bounds = new window.google.maps.LatLngBounds(center);
     map.fitBounds(bounds);
