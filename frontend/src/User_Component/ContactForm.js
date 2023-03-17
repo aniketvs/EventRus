@@ -10,6 +10,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InputAdornment from '@mui/material/InputAdornment';
 import PersonIcon from '@mui/icons-material/Person';
 import { Container } from '@mui/system';
+import {URL} from '../Url'
 
 
 export default function ContactForm() {
@@ -18,7 +19,7 @@ export default function ContactForm() {
     let [phone, setphone] = useState(0);
     let [message, setmessage] = useState('');
     const sendMsg = async () => {
-        let result = await fetch('http://localhost:5000/contact', {
+        let result = await fetch(`${URL}contact`, {
             method: 'POST',
             body: JSON.stringify({ name, email, phone, message }),
             headers: {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams ,Link} from "react-router-dom";
-import verification_image from '../images/checkmark.png'
+import verification_image from '../images/checkmark.png';
+import {URL} from '../Url';
 const Email_verification = ()=>{
     let params = useParams();
     let [verify,setverify]=useState(false);
@@ -8,7 +9,7 @@ const Email_verification = ()=>{
 
         let verification = async()=>{
             try{
-            await fetch(`http://localhost:5000/${params.id}/verify/${params.token}`)
+            await fetch(`${URL}${params.id}/verify/${params.token}`)
                setverify(true)
             } catch(error){
                 console.log(error);

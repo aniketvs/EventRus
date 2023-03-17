@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import {URL} from '../Url'
 const Productlist = (p) => {
 
     const [product, setproduct] = useState([]);
@@ -11,7 +11,7 @@ const Productlist = (p) => {
     }, []);
 
     const getproduct = async () => {
-        const data = await fetch("http://localhost:5000/", {
+        const data = await fetch(`${URL}`, {
             headers: {
                 authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`
             }
@@ -29,7 +29,7 @@ const Productlist = (p) => {
   
     const deletedata = async (id) => {
 
-        let result = await fetch(`http://localhost:5000/delete/${id}`, {
+        let result = await fetch(`${URL}delete/${id}`, {
             method: 'Delete',
             headers: {
                 authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`
@@ -49,7 +49,7 @@ const Productlist = (p) => {
     const searchmethod = async (event) => {
         let key = event.target.value;
         if (key) {
-            let result = await fetch(`http://localhost:5000/search/${key}`, {
+            let result = await fetch(`${URL}search/${key}`, {
                 headers: {
                     authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`
                 }

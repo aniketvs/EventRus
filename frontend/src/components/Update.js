@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import pic from "../images/refresh.png";
 import banner from "../images/banner_2.png"
 import {useNavigate, useParams} from 'react-router-dom';
+import {URL} from '../Url'
 export default function Update() {
     const [name,setname] =useState("");
     const [cateogry,setcateogry]=useState("");
@@ -16,7 +17,7 @@ export default function Update() {
 
     const prefil = async()=>{
        
-        let result = await fetch(`http://localhost:5000/update/${params.id}`,{
+        let result = await fetch(`${URL}update/${params.id}`,{
             headers:{
                 authorization:`bearer ${JSON.parse(localStorage.getItem('token'))}`
             }
@@ -59,7 +60,7 @@ const testregx=/[(a-zA-Z)+(!@#$%^&*())+]/ ;
         formData.append('cateogry',cateogry);
         formData.append('price',price);
       
-        let result =await fetch(`http://localhost:5000/update/${params.id}`,{
+        let result =await fetch(`${URL}update/${params.id}`,{
             method:'put',
             body:formData,
             headers:{

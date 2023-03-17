@@ -1,7 +1,7 @@
 import React ,{useState}from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
+import {URL} from '../Url'
 const Addproduct = () => {
   const [name,setname] =useState("");
   const [cateogry,setcateogry] =useState("");
@@ -19,6 +19,7 @@ const testregx=/[(a-zA-Z)+(!@#$%^&*())+]/;
 ///[(a-zA-Z)+(\!\@\#\$\%\^\&\*\(\))+]/;
  const add= async()=>{
   // if name,prie,company and cateogry is empty
+  try{
   if(!name && !price && !company && !cateogry && !pic){
  
      seterrors(true);
@@ -49,7 +50,7 @@ formData.append('productpic',pic[i]);
 formData.append('userid',userid);
 
 
- let result = await fetch('http://localhost:5000/add',{
+ let result = await fetch(`${URL}add`,{
     method:'post',
     body:formData,
     headers:{
@@ -65,7 +66,9 @@ formData.append('userid',userid);
   }else{
       alert('please provide correct details');
   }
-
+  }catch(e){
+    console.log(e);
+  }
  }
 
 

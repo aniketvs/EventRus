@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {  Link, useNavigate } from 'react-router-dom';
-
+import {URL} from '../Url'
 const Login = () => {
 
     useEffect(() => {
@@ -24,6 +24,7 @@ const Login = () => {
 
     const login = async () => {
         //validating email and password in emty case
+        try{
         if (!email && !password) {
             seterrors(true);
             return false;
@@ -33,7 +34,7 @@ const Login = () => {
             seterrors(true);
             return false;
         }
-        let result = await fetch('http://localhost:5000/login', {
+        let result = await fetch(`${URL}login`, {
             method: 'POST',
             body: JSON.stringify({ email, password }),
             headers: {
@@ -60,6 +61,9 @@ const Login = () => {
         } else {
             alert('please provide email and password correct');
         }
+    }catch (error) {
+        console.log(error);
+    }
     }
 
 

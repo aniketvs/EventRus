@@ -12,7 +12,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import IconButton from '@mui/material/IconButton';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-
+import {URL} from '../../Url'
 import EmailVerification from './Login/EmailVerification';
 
 export default function (props) {
@@ -68,7 +68,7 @@ export default function (props) {
         setregerror(true);
         return false;
       }
-    let result = await fetch('http://localhost:5000/register', {
+    let result = await fetch(`${URL}register`, {
       method: 'POST',
       body: JSON.stringify({ name, phone, email, password }),
       headers: {
@@ -121,7 +121,7 @@ const LoginDB=async()=>{
       setloginerror(true);
       return false;
      }
-    let result=await fetch('http://localhost:5000/userlogin',{
+    let result=await fetch(`${URL}userlogin`,{
       method: 'POST',
       body: JSON.stringify({loginemail,loginpassword }),
       headers: {
@@ -166,7 +166,7 @@ const ResendEmail = async()=>{
  let getid=_id;
 let getemail=loginemail;
 try{
-  let result = await fetch('http://localhost:5000/resendEmail', {
+  let result = await fetch(`${URL}resendEmail`, {
       method: 'POST',
       body: JSON.stringify({getid,getemail}),
       headers: {

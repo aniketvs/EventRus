@@ -3,7 +3,7 @@ import { Box } from '@mui/system'
 import i_6 from '../images/10.jpg';
 import { Link } from 'react-router-dom';
 import '../Style/Services.css'
-
+import {URL} from '../../Url';
 export default function () {
     let [service, setservice] = useState([]);
     useEffect(() => {
@@ -12,7 +12,7 @@ export default function () {
 
     }, []);
     const getservices = async () => {
-        let result = await fetch('http://localhost:5000/services');
+        let result = await fetch(`${URL}services`);
         const data = await result.json();
         setservice(data);
 

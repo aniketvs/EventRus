@@ -151,13 +151,14 @@ let userLogout=()=>{
                     Gallery
                   </Link>
                 </li>
-
+               {/*
                 <li className="nav-item">
 
                   <Link className="nav-link nav-link-color" to="/contact_us">
                     Contact-Us
                   </Link>
                 </li>
+                */}
                 <li className="nav-item">
 
                   <Link className="nav-link nav-link-color" to="/contact_us">

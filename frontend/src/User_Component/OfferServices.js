@@ -1,5 +1,6 @@
 import React ,{useState,useEffect}from 'react';
 import  {Link}  from 'react-router-dom';
+import {URL} from '../Url'
 export default function Offer_Services() {
     let [service, setservice] = useState([]);
     useEffect(() => {
@@ -9,7 +10,7 @@ export default function Offer_Services() {
     }, []);
     const getservices = async () => {
         try{
-        let result = await fetch('http://localhost:5000/services');
+        let result = await fetch(`${URL}services`);
         const data = await result.json();
         setservice(data);
         }catch(error){

@@ -16,7 +16,7 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom'
-
+import {URL} from '../../Url'
 export default function Contact() {
 
 
@@ -31,7 +31,7 @@ export default function Contact() {
 
     let result = async () => {
         try {
-            let res = await fetch(`http://localhost:5000/book/${params.id}`);
+            let res = await fetch(`${URL}book/${params.id}`);
             res = await res.json();
 
             seteventName(res.name);
@@ -121,7 +121,7 @@ export default function Contact() {
                  return false;
             }
 
-            let result = await fetch('http://localhost:5000/bookContact', {
+            let result = await fetch(`${URL}bookContact`, {
                 method: 'POST',
                 body: JSON.stringify({ name, email, phone, eventName, eventType, startDate, endDate, message }),
 
@@ -160,7 +160,7 @@ export default function Contact() {
     return (
         <>
 
-            <Container className="container-margin">
+            <Container className="container-margin margin-bottom-more">
 
                 <Box className='MainDiv' data-aos='fade-right'>
 

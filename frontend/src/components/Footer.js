@@ -5,6 +5,7 @@ import instagram_logo from "../images/instagram.png"
 import facebook_logo from "../images/facebook.png" 
 import twitter_logo from "../images/twitter.png" 
 import Mapg from "../User_Component/Mapg";
+import {URL} from '../Url'
 const Footer=(p)=>{
   let [text,settext]=useState("");
   let [subject,setsubject]=useState("");
@@ -12,6 +13,7 @@ let [error,seterror]=useState(false);
 const phone =/^([+]\d{2})?\d{10}$/;
 
   let sendmail=async ()=>{
+    try{
     if(!text  && !subject){
       seterror(true);
       return false;
@@ -21,7 +23,7 @@ const phone =/^([+]\d{2})?\d{10}$/;
     return false;
   }
 
-   let result= await fetch('http://localhost:5000/send-mail',{
+   let result= await fetch(`${URL}send-mail`,{
       method:'post',
       body:JSON.stringify({text,subject}),
       headers:{
@@ -32,7 +34,9 @@ const phone =/^([+]\d{2})?\d{10}$/;
   result=await result.json();
 
 alert("message sent succefully",result);
-
+  }catch(err){
+    console.log(err);
+  }
 
 
   }

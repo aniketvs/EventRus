@@ -4,6 +4,7 @@ import { Box } from '@mui/system'
 import {Button} from '@mui/material'
 import '../../Style/Login.css'
 import { Typography } from '@mui/material'
+import {URL} from '../../../Url'
 export default function EmailVerification() {
     const ResendEmail = async()=>{
         let data=localStorage.getItem('register_user');
@@ -11,7 +12,7 @@ export default function EmailVerification() {
        let getid=data._id;
       let getemail=data.email;
       try{
-        let result = await fetch('http://localhost:5000/resendEmail', {
+        let result = await fetch(`${URL}resendEmail`, {
             method: 'POST',
             body: JSON.stringify({getid,getemail}),
             headers: {
