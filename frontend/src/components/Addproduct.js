@@ -13,7 +13,7 @@ const Addproduct = () => {
   let userid=JSON.parse(auth)._id;
   const navigate = useNavigate();
 //price and text regex
-const regex=/\^(\d*([.,](?=\d{3}))?\d+)+((?!\2)[.,]\d\d)?$/;
+const regex= /\d+/; ///\^(\d*([.,](?=\d{3}))?\d+)+((?!\2)[.,]\d\d)?$/
 const testregx=/[(a-zA-Z)+(!@#$%^&*())+]/;
 
 ///[(a-zA-Z)+(\!\@\#\$\%\^\&\*\(\))+]/;

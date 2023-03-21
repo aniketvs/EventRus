@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import {  useNavigate } from 'react-router-dom';
-import {URL} from '../Url'
+
 export default function Signup() {
   let [name, setname] = useState('');
   let [email, setEmail] = useState('');
@@ -29,6 +29,7 @@ export default function Signup() {
   let signup = async (e) => {
     e.preventDefault()
     //if name email and password is empty
+    try{
     if (!name && !email && !password && img) {
       seterrors(true);
       return false;
@@ -52,7 +53,7 @@ export default function Signup() {
     formData.append('email', email);
     formData.append('password', password);
     formData.append('verified', false);
-    let result = await fetch(`${URL}signup`, {
+    let result = await fetch("http://localhost:5000/signup", {
       method: 'post',
       body: formData,
       headers: {
@@ -74,7 +75,9 @@ export default function Signup() {
       navigate('/')
     }
 
-
+  }catch (e) {
+    console.log(e);
+  }
 
   }
 
