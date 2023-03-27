@@ -1,0 +1,207 @@
+/* Nav bar brand logo*/
+@media screen and (max-width:850px) and (min-width:650px) {
+    .logoMedia{
+    width: 100px;
+    aspect-ratio: auto;
+    height: 70px;
+    }
+}
+.navbar-toggler {
+   /* background: rgb(235, 233, 233);*/
+   background-color: white;
+   opacity: 0.9;
+   
+}
+@media screen and (max-width:649px) and (min-width:450px) {
+    .logoMedia{
+    width: 80px;
+   
+    height: 50px;
+    aspect-ratio: auto;
+    }
+}
+
+@media screen and (max-width:449px){
+    .logoMedia{
+        width: 70px;
+        height: 35px;
+        aspect-ratio: auto;
+    }
+}
+
+/*text secotion*/
+@media screen and (max-width:700px) {
+    .active-text-size{
+        font-size: 23px !important;
+    }
+}
+@media screen and (max-width:832px) and (min-width:685px) {
+    .active-card-text-size{
+        font-size: 0.8rem !important;
+    }
+}
+@media screen and (max-width:684px) and (min-width:601px) {
+    .active-card-text-size{
+        font-size: 11px !important;
+    }
+}
+@media screen and (max-width:684px) and (min-width:601px) {
+    .active-card-text-size{
+        font-size: 15px !important;
+    }
+   
+}
+@media screen and (max-width:600px) {
+    .active-padding-text{
+        padding-block-end: 30px !important;
+    }
+}
+
+
+/*anout us section*/
+
+@media screen and (max-width:991px) and (min-width:768px) {
+    .about-us-text{
+        margin-bottom: 1rem !important;
+        font-size: 0.9rem !important;
+        line-height: 1.28rem !important;
+    }
+    .about-us-text-body{
+        padding-block-start: 0px;
+        padding-left: 2.5rem;
+        padding-right: 1.5rem;
+    }
+    
+}
+@media screen and (max-width:767px) {
+    .rounded-start{
+        border-radius: 5px !important;
+    margin-block-end: 0.7rem !important;
+    }
+    .About-us-body {
+        margin-bottom: 30px !important;
+    }
+}
+
+/*gallery section*/
+
+.padding-img{
+    padding: 0.4rem 0.4rem !important;
+}
+@media screen and (max-width:575px) {
+    .active-hide{
+        display: none !important;
+    }
+    .service-btn {
+        padding-bottom: 0px !important;
+    }
+}
+@media screen and (max-width:850px) and (min-width:574px) {
+    .service-btn{
+padding-block-end: 20px !important;
+    }
+
+}
+
+
+/*services section*/
+@media screen and (max-width:793px) {
+    
+
+.service-card-body {
+    margin-block-end: 0px !important;
+}
+.active-margin-top{
+    margin-block-start: 40px;
+    padding-bottom:30px !important;
+}
+.active-margin-bottom{
+    margin-block-end: 0px !important;
+}
+}
+
+/*contact section */
+@media screen and (max-width:720px)  and (min-width:351px){
+    .active-margin-bottom-contact{
+        margin-bottom: 4rem !important;
+    }
+    .Social-icon{
+        margin-top:3.5rem !important;
+    }
+    .social-item {
+        margin-right: 1.1rem !important;
+    }
+}
+
+@media screen and (max-width:350px){
+    .active-margin-bottom-contact{
+        margin-bottom: 2rem !important;
+    }
+    .Social-icon{
+        margin-top:3rem !important;
+    }
+    .social-item {
+        margin-right: 0.74rem !important;
+    }
+}
+
+
+
+
+/*testimonial section*/
+/*carousel padding handeling*/
+.Carousel-Div{
+padding: 5rem 0rem !important;
+}
+.TestimonialCard{
+    width: 30% !important;
+}
+@media screen and (max-width:1000px) and (min-width:820px){
+    .TestimonialCard{
+        width:40% !important;
+    }
+}
+@media screen and (max-width:819px) and (min-width:600px) {
+    .TestimonialCard{
+        width:50% !important;
+    }
+}
+@media screen and (max-width:599px) {
+    .TestimonialCard{
+        width:80% !important;
+    }
+}
+/* footer section */
+
+
+/* hiding address*/
+@media screen and (max-width:575px) and (min-width:431px) {
+    .active-hide{
+        display: none;
+    }
+    
+}
+@media screen and (max-width:430px) {
+    .footer-active-img{
+        width:23px !important;
+    }
+    
+    .footer-link-active{
+        font-size: 11.5px !important;
+    }
+    .footer-link-head-active{
+        font-size: 13px !important;
+}
+.social-icon {
+    padding-right: 10px;
+}
+.social-media-text {
+    margin-bottom: 1em !important;
+}
+.active-logo-footer{
+    width: 110px;
+    height: 95px;
+   
+}
+}
+

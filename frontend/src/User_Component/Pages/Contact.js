@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../Style/ContactUs.css'
-import { Box, Button, Grid, TextField, Typography } from '@mui/material';
+import { Box, Button, Grid, TextField, Typography ,Modal} from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -17,6 +17,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom'
 import {URL} from '../../Url'
+import '../Style/MediaQuery.css'
+import Spineer from '../../components/Spineer';
 export default function Contact() {
 
 
@@ -69,6 +71,7 @@ export default function Contact() {
     let [phoneregex, setphoneregex] = useState(false);
     let [emailregex, setemailregex] = useState(false);
     let [nameregex, setnameregex] = useState(false);
+    let[loader,setLoader]=useState(false);
     const sendMsg = async () => {
 
 
@@ -120,7 +123,7 @@ export default function Contact() {
                 setnameregex(true);
                  return false;
             }
-
+             setLoader(true);
             let result = await fetch(`${URL}bookContact`, {
                 method: 'POST',
                 body: JSON.stringify({ name, email, phone, eventName, eventType, startDate, endDate, message }),
@@ -130,11 +133,11 @@ export default function Contact() {
                 }
             });
             result = await result.json();
-
+              setLoader(false);
             if (result.result === false) {
                 alert('fail');
             } else {
-                alert('Your query is submitted successfully');
+               
                 setname('');
                 setemail('');
                 setphone("");
@@ -159,13 +162,25 @@ export default function Contact() {
     }
     return (
         <>
-
+                   {
+                        loader ?
+                            <div>
+                                <Modal open={loader}  aria-labelledby="modal-modal-title"
+                                    aria-describedby="modal-modal-description">
+                                    <div className='d-flex justify-content-center my-auto modal-spineer'>
+                                        <Spineer />
+                                    </div>
+                                </Modal>
+                            </div>
+                            : ""
+                    }
             <Container className="container-margin margin-bottom-more">
 
                 <Box className='MainDiv' data-aos='fade-right'>
 
 
                     <Box>
+                       
                         <p className='banner-card-header text-color-g'>Contact Us</p>
                         <p className='banner-card-text text-align-line'> Fill Up The Form And Our Team Will Get Back To  You Within 24 Hours.</p>
                         <Box className='ConatactItem '>

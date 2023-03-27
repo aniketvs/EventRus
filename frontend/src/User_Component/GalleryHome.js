@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import img1 from '../User_images/img1.png';
 import img2 from '../User_images/img2.png';
 import img3 from '../User_images/img3.png';
+import './Style/MediaQuery.css'
 export default function Gallery_Home() {
     return (
         <>
@@ -10,7 +11,7 @@ export default function Gallery_Home() {
                 <p className='banner-card-header text-align-center gallery-header' data-aos="fade-down">Our Gallery</p>
 
                 <div className='row pb-4' data-aos='fade-down'>
-                    <div className='col-lg-4 col-sm-6 col-12' >
+                    <div className='col-lg-4 padding-img col-sm-6 col-12' >
                         <div className="card text-bg-dark gallery-card-body" >
                             <div class="hover03 column">
                                 <div>
@@ -25,7 +26,7 @@ export default function Gallery_Home() {
                             </div>
                         </div>
                     </div>
-                    <div className='col-lg-4 col-sm-6 col-12'>
+                    <div className='col-lg-4 padding-img col-sm-6 col-12'>
                         <div className="card text-bg-dark gallery-card-body" >
                             <div class="hover03 column">
                                 <div>
@@ -40,7 +41,7 @@ export default function Gallery_Home() {
                             </div>
                         </div>
                     </div>
-                    <div className='col-lg-4 col-sm-6 col-12' >
+                    <div className='col-lg-4 padding-img col-sm-6 col-12' >
                         <div className="card text-bg-dark gallery-card-body" >
                             <div class="hover03 column">
                                 <div>
@@ -56,10 +57,7 @@ export default function Gallery_Home() {
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div className='row pb-5' data-aos='fade-up'>
-                    <div className='col-lg-4 col-sm-6 col-12' >
+                    <div className='col-lg-4 padding-img  active-hide col-sm-6 col-12' >
                         <div className="card text-bg-dark gallery-card-body">
                             <div class="hover03 column">
                                 <div>
@@ -74,7 +72,7 @@ export default function Gallery_Home() {
                             </div>
                         </div>
                     </div>
-                    <div className='col-lg-4 col-sm-6 col-12' >
+                    <div className='col-lg-4 padding-img  active-hide col-sm-6 col-12' >
                         <div className="card text-bg-dark gallery-card-body" >
                             <div class="hover03 column">
                                 <div>
@@ -89,7 +87,7 @@ export default function Gallery_Home() {
                             </div>
                         </div>
                     </div>
-                    <div className='col-lg-4 col-sm-6 col-12'>
+                    <div className='col-lg-4 padding-img  active-hide col-sm-6 col-12'>
                         <div className="card text-bg-dark gallery-card-body" >
                             <div class="hover03 column">
                                 <div>

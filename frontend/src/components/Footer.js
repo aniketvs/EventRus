@@ -6,6 +6,7 @@ import facebook_logo from "../images/facebook.png"
 import twitter_logo from "../images/twitter.png" 
 import Mapg from "../User_Component/Mapg";
 import {URL} from '../Url'
+import '../User_Component/Style/MediaQuery.css'
 const Footer=(p)=>{
   let [text,settext]=useState("");
   let [subject,setsubject]=useState("");
@@ -49,33 +50,33 @@ alert("message sent succefully",result);
   
   <div className="card-body footer-pad">
    <div className="row">
-      <div className="col-12 footer-img">
-      <img src={brand_logo} alt={brand_logo} width="150" height="120" />
+      <div className="col-12 footer-img ">
+      <img src={brand_logo} alt={brand_logo} width="150" height="120"  className="active-logo-footer"/>
    
       </div>
-      <div className="col-4">
+      <div className="col-6 col-sm-4 col-md-4 col-lg-4">
       <p className="social-media-text"> Social Media</p>
       <ul className="footer-list-social">
             
-            <li className="social-icon"> <Link href="/admin">  <img src={instagram_logo} alt={instagram_logo}  /></Link> </li>
-            <li className="social-icon"> <Link href="/admin">  <img src={facebook_logo} alt={facebook_logo}  /></Link> </li>
-           <li className="social-icon"> <Link href="/admin">  <img src={twitter_logo} alt={twitter_logo}  /></Link> </li>
+            <li className="social-icon"> <Link href="/admin">  <img src={instagram_logo}  className="footer-active-img" alt={instagram_logo}  /></Link> </li>
+            <li className="social-icon"> <Link href="/admin">  <img src={facebook_logo}  className="footer-active-img" alt={facebook_logo}  /></Link> </li>
+           <li className="social-icon"> <Link href="/admin">  <img src={twitter_logo}  className="footer-active-img" alt={twitter_logo}  /></Link> </li>
            
          </ul>
          
       </div>
-      <div className="col-4">
+      <div className="col-6 col-sm-4 col-md-4 col-lg-4">
          <ul className="footer-list">
-         <li> <Link to="/admin" className="foter-link">Quick Links</Link> </li>
-            <li> <Link to="/admin" className="foter-link">Home</Link> </li>
-            <li> <Link to="/admin" className="foter-link">Help</Link> </li>
-            <li> <Link to="/admin" className="foter-link">Add Product</Link> </li>
-            <li> <Link to="/admin"  className="foter-link" onClick={()=>{p.alert(true)}} >Admin Panel</Link> </li>
+         <li> <Link to="/admin" className="foter-link footer-link-head-active">Quick Links</Link> </li>
+            <li> <Link to="/admin" className="foter-link footer-link-active">Home</Link> </li>
+            <li> <Link to="/admin" className="foter-link footer-link-active">Help</Link> </li>
+            <li> <Link to="/admin" className="foter-link footer-link-active">Add Product</Link> </li>
+            <li> <Link to="/admin"  className="foter-link footer-link-active" onClick={()=>{p.alert(true)}} >Admin Panel</Link> </li>
         
-            <li> <Link to="/admin" className="foter-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Contact Us</Link> </li>
+            <li> <Link to="/admin" className="foter-link footer-link-active" data-bs-toggle="modal" data-bs-target="#exampleModal">Contact Us</Link> </li>
          </ul>
       </div>
-      <div className="col-4">
+      <div className="col-12 col-sm-4 col-md-4 col-lg-4 active-hide">
     
          <p className="footer-add">G-34/A , First Floor</p>
            <p className="footer-add">Indra Bhavan , Civil Line</p>

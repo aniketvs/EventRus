@@ -1,18 +1,21 @@
 import React ,{useState,useEffect}from 'react';
 import  {Link}  from 'react-router-dom';
+import Spineer from '../components/Spineer';
 import {URL} from '../Url'
+import './Style/MediaQuery.css'
 export default function Offer_Services() {
     let [service, setservice] = useState([]);
+    let [loader,setLoader]=useState(false);
     useEffect(() => {
         getservices();
-       
-
-    }, []);
+       }, []);
     const getservices = async () => {
         try{
+            setLoader(true);
         let result = await fetch(`${URL}services`);
         const data = await result.json();
         setservice(data);
+        setLoader(false);
         }catch(error){
             console.warn(error);
         }
@@ -21,10 +24,14 @@ export default function Offer_Services() {
   return (
    <>
      <div>
-                <p className='banner-card-header text-align-center' data-aos="fade-down">Services We Offer
+                <p className='banner-card-header text-align-center active-margin-bottom' data-aos="fade-down">Services We Offer
 
 
                 </p>
+                { loader ?  
+                    <div className='d-flex justify-content-center'>
+                <Spineer/>
+                </div>:
                 <div className='service-card-main-body row' data-aos="fade-up">
                     {
                         service.length > 0 ?
@@ -65,11 +72,11 @@ export default function Offer_Services() {
 
                     }
 
-                    <div className='justify-content-center text-align-center service-btn' data-aos="fade-up">
+                    <div className='justify-content-center text-align-center service-btn active-margin-top' data-aos="fade-up">
                         <Link to='/services' type="button" class="btn btn-outline-success ">Know More</Link>
                     </div>
                 </div>
-
+                }
             </div>
 
    </>

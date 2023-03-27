@@ -5,6 +5,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Box } from "@mui/system";
 import Login from "../User_Component/Pages/Login";
 import LogoutIcon from '@mui/icons-material/Logout';
+import '../User_Component/Style/MediaQuery.css'
 const Nav = (props) => {
  useParams();
    
@@ -57,7 +58,7 @@ let userLogout=()=>{
       <nav className="navbar navbar-expand-lg bg-light nav-fit">
         <div className="container-fluid">
           <Link to="/admin" className="navbar-brand">
-            <img src={brand_logo} alt={brand_logo} width="150" height="80" />
+            <img src={brand_logo} alt={brand_logo} width="150" height="80"  className="logoMedia"/>
 
           </Link>
           <button
@@ -159,12 +160,14 @@ let userLogout=()=>{
                   </Link>
                 </li>
                 */}
+                {/*
                 <li className="nav-item">
 
                   <Link className="nav-link nav-link-color" to="/contact_us">
                     Status
                   </Link>
                 </li>
+                */}
                 <li className="nav-item signup-li">
                  { userVerified===true?
                   <Link className="nav-link nav-link-color signup-mainbox" to="/">

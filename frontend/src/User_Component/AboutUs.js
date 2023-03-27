@@ -1,6 +1,7 @@
 import React from "react";
 import img2 from '../User_images/img2.png';
 import { Link } from "react-router-dom";
+import './Style/MediaQuery.css'
 export default function About_us(){
     return(<>
          <div className='container About-us-body'>

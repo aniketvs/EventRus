@@ -72,6 +72,19 @@
     word-spacing: 0.2rem;
 
 }
+@media screen and (max-width:900px) and (min-width:750px) {
+    .about-us-text{
+        margin-bottom: 1rem !important;
+        font-size: 0.9rem !important;
+        line-height: 1.28rem !important;
+    }
+    .about-us-text-body{
+        padding-block-start: 0px;
+        padding-left: 2.5rem;
+        padding-right: 1.5rem;
+    }
+    
+}
 .Aboutus-fullwidth-img{
 height: 400px;
 object-fit: cover;

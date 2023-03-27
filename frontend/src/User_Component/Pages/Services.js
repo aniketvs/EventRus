@@ -3,18 +3,29 @@ import { Box } from '@mui/system'
 import i_6 from '../images/10.jpg';
 import { Link } from 'react-router-dom';
 import '../Style/Services.css'
-import {URL} from '../../Url';
+import { URL } from '../../Url';
+import Spineer from '../../components/Spineer';
 export default function () {
     let [service, setservice] = useState([]);
+    let [loader, setLoader] = useState(false);
     useEffect(() => {
+        
         getservices();
 
 
     }, []);
     const getservices = async () => {
-        let result = await fetch(`${URL}services`);
-        const data = await result.json();
-        setservice(data);
+        try {
+            setLoader(true);
+            console.log(loader);
+            let result = await fetch(`${URL}services`);
+            const data = await result.json();
+            setservice(data);
+            setLoader(false);
+            console.log(loader);
+        } catch (e) {
+            console.log(e);
+        }
 
     }
     return (
@@ -23,50 +34,56 @@ export default function () {
                 <img src={i_6} className="img-fluid img-ratio Gallery-img" alt={i_6} />
                 <h2 className='Gallery-Heading' data-aos='fade-up'>Our Services</h2>
             </Box>
-            <div className='service-main-div'>
-                <div className='service-card-main-body row' data-aos="fade-up">
-                    {
-                        service.length > 0 ?
-                            service.map((item,index) =>
-                                <div key={item._id} className="card service-card-body col-lg-4 col-md-4 col-sm-6 col-12" >
-                                    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                                        <div class="carousel-inner">
+            {
+                loader ?
+                    <div className='d-flex justify-content-center'>
+                        <Spineer />
+                    </div>
+                    :
+                    <div className='service-main-div'>
+                        <div className='service-card-main-body row' data-aos="fade-up">
+                            {
+                                service.length > 0 ?
+                                    service.map((item, index) =>
+                                        <div key={item._id} className="card service-card-body col-lg-4 col-md-4 col-sm-6 col-12" >
+                                            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                                                <div class="carousel-inner">
 
 
-                                            {
+                                                    {
 
 
-                                                item.productpic.map((i, ind) => {
-                                                    return (
-                                                        <div class="carousel-item active">
-                                                            <img src={"." + i.path.split("public")[1]} className="card-img-top" alt={"." + i.path.split("public")[1]} />
-                                                        </div>
-                                                    )
+                                                        item.productpic.map((i, ind) => {
+                                                            return (
+                                                                <div class="carousel-item active">
+                                                                    <img src={"." + i.path.split("public")[1]} className="card-img-top" alt={"." + i.path.split("public")[1]} />
+                                                                </div>
+                                                            )
 
-                                                })
+                                                        })
 
 
 
-                                            }
+                                                    }
+                                                </div>
+                                            </div>
+
+                                            <div className="card-body">
+                                                <h5 className="card-title">{item.name}</h5>
+                                                <p className="card-text">{item.company}</p>
+                                                <p className="card-text">{(item.cateogry).slice(0, 50)}</p>
+                                                <Link to={`/book/${item._id}`} className="btn btn-green book-btn" >Book Now</Link>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div className="card-body">
-                                        <h5 className="card-title">{item.name}</h5>
-                                        <p className="card-text">{item.company}</p>
-                                        <p className="card-text">{(item.cateogry).slice(0, 50)}</p>
-                                        <Link to="/" className="btn btn-green book-btn" >Book Now</Link>
-                                    </div>
-                                </div>
-                            )
-                            : ""
+                                    )
+                                    : ""
 
 
-                    }
-                </div>
-            </div>
+                            }
+                        </div>
+                    </div>
 
-
+            }
         </>
     )
 }

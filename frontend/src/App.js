@@ -8,7 +8,7 @@ import Signup from './components/Signup';
 import Private from './components/Private';
 import Login from './components/Login';
 import Addproduct from './components/Addproduct';
-import { BrowserRouter,Routes , Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Productlist from './components/Productlist';
 import Update from './components/Update';
 import Profile from './components/Profile';
@@ -21,46 +21,46 @@ import MailVerification from './User_Component/Pages/MailVerification';
 import Contact from './User_Component/Pages/Contact';
 
 function App() {
-  let [front,setfront]=useState(false);
-  
-  function parentalert(data){
- setfront(data);
+  let [front, setfront] = useState(false);
+
+  function parentalert(data) {
+    setfront(data);
   }
- 
- 
+
+
   return (
     <>
-    <BrowserRouter>
-    <Nav front_p={front}/>
-    <Routes>
-     <Route path="/" element={<Home />}/>
-     <Route path='/gallery' element={<Gallery/>}/>
-     <Route path='/services' element={<Services/>}/>
-     <Route path='/aboutus' element={<AboutUS/>} />
+      <BrowserRouter>
+        <Nav front_p={front} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path='/gallery' element={<Gallery />} />
+          <Route path='/services' element={<Services />} />
+          <Route path='/aboutus' element={<AboutUS />} />
 
-     
-     <Route path='/book/:id' element={<Contact/>} />
-    
-     <Route path="register/:id/UserVerification/:token" element={<MailVerification/>}/>
-      <Route element={<Private/>} >
-        
-     
-      <Route path="/admin" element={<Productlist/> }  >  </Route>
-      <Route path="/add" element={<Addproduct />}/>
-      <Route path="/update/:id" element={<Update />}  />
-      <Route path="signup/:id/verify/:token" element={<EmailVerification />}/>
-     <Route path="/logout" element={<h1>logout</h1>}/>
-      <Route path="/profile" element={<Profile />}/>
-     
-      
-      </Route>
-      <Route path="/login" element={<Login />} />
-      <Route path='/signup' element={<Signup/>} />
-    </Routes>
-    <Footer  alert={parentalert}/>
-    </BrowserRouter>
-    
-      
+
+          <Route path='/book/:id' element={<Contact />} />
+
+          <Route path="register/:id/UserVerification/:token" element={<MailVerification />} />
+          <Route element={<Private />} >
+
+
+            <Route path="/admin" element={<Productlist />}  >  </Route>
+            <Route path="/add" element={<Addproduct />} />
+            <Route path="/update/:id" element={<Update />} />
+            <Route path="signup/:id/verify/:token" element={<EmailVerification />} />
+            <Route path="/logout" element={<h1>logout</h1>} />
+            <Route path="/profile" element={<Profile />} />
+
+
+          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+        </Routes>
+        <Footer alert={parentalert} />
+      </BrowserRouter>
+
+
     </>
   );
 }

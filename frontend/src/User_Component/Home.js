@@ -8,6 +8,7 @@ import GalleryHome from './GalleryHome';
 import Testimonial from './Testimonial';
 import '../User_Component/Style/Home.css'
 import ContactForm from './ContactForm';
+import './Style/MediaQuery.css'
 
 export default function Home() {
    
@@ -24,15 +25,15 @@ export default function Home() {
             {/*Banner*/}
              <Banner/>
             {/*good lines*/}
-            <div className="card banner-card-body" data-aos="fade-down">
+            <div className="card banner-card-body active-padding-text" data-aos="fade-down">
                 <div className="card-body">
-                    <p className='banner-card-header'>FOR THE FEARLESSLY AUTHENTIC</p>
-                    <p className='banner-card-text'>
+                    <p className='banner-card-header active-text-size'>FOR THE FEARLESSLY AUTHENTIC</p>
+                    <p className='banner-card-text active-card-text-size'>
                         We are your go-to people when it comes to wedding and event styling and florals. We can do as much or <br></br> as little as you need – looking after all styling, hire and the all important blooms. We think of everything <br />so that you don’t have to and we pride ourselves on always having your best interest at heart
                     </p>
                 </div>
             </div>
-
+           
             {/*About Us*/}
              <AboutUs/>
             {/* Our Services */}

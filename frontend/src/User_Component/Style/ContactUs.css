@@ -103,3 +103,10 @@
 .margin-bottom-more{
     margin-bottom: 7rem !important;
 }
+.modal-spineer{
+    transform: translate(0%,50%);
+    margin: auto;
+    border: none;
+    outline: none;
+    height: 100%;
+}
